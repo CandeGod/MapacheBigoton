@@ -28,20 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lblHora = new Label();
+            lblFecha = new Label();
             lblCliente = new Label();
             lblBarbero = new Label();
             lblServicio = new Label();
             SuspendLayout();
             // 
-            // lblHora
+            // lblFecha
             // 
-            lblHora.AutoSize = true;
-            lblHora.Location = new Point(35, 17);
-            lblHora.Name = "lblHora";
-            lblHora.Size = new Size(45, 20);
-            lblHora.TabIndex = 0;
-            lblHora.Text = "Hora:";
+            lblFecha.AutoSize = true;
+            lblFecha.Location = new Point(35, 17);
+            lblFecha.Name = "lblFecha";
+            lblFecha.Size = new Size(50, 20);
+            lblFecha.TabIndex = 0;
+            lblFecha.Text = "Fecha:";
             // 
             // lblCliente
             // 
@@ -74,10 +74,11 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ActiveCaption;
             Controls.Add(lblServicio);
             Controls.Add(lblBarbero);
             Controls.Add(lblCliente);
-            Controls.Add(lblHora);
+            Controls.Add(lblFecha);
             Name = "UserControlCitaAgendada";
             Size = new Size(400, 174);
             ResumeLayout(false);
@@ -86,7 +87,7 @@
 
         #endregion
 
-        private Label lblHora;
+        private Label lblFecha;
         private Label lblCliente;
         private Label lblBarbero;
         private Label lblServicio;

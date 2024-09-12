@@ -8,8 +8,8 @@ namespace MapacheBigoton.Class
 {
     public class Barber
     {
-        int IdBarbero {  get; set; }
-        string NombreBarbero { get; set; }
+        public int IdBarbero {  get; set; }
+        public string NombreBarbero { get; set; }
 
     }
 }

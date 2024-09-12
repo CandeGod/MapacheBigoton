@@ -8,11 +8,11 @@ namespace MapacheBigoton.Class
 {
     public class Cita
     {
-        int IdCita { get; set; }
-        DateTime Fecha { get; set; }
-        Client Client { get; set; }
-        Barber Barber { get; set; }
-        Service Service { get; set; }
+        public int IdCita { get; set; }
+        public DateTime Fecha { get; set; }
+        public Client Client { get; set; }
+        public Barber Barber { get; set; }
+        public Service Service { get; set; }
     }
 
 }
