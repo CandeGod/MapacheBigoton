@@ -35,6 +35,7 @@
             label2 = new Label();
             label1 = new Label();
             panelServicios = new Panel();
+            flpServicios = new FlowLayoutPanel();
             pictureBox1 = new PictureBox();
             panelCalendario = new Panel();
             label3 = new Label();
@@ -45,7 +46,6 @@
             label6 = new Label();
             panel3 = new Panel();
             label5 = new Label();
-            flpServicios = new FlowLayoutPanel();
             panelTop.SuspendLayout();
             panelIzquierda.SuspendLayout();
             panel1.SuspendLayout();
@@ -129,6 +129,14 @@
             panelServicios.Size = new Size(1000, 630);
             panelServicios.TabIndex = 3;
             // 
+            // flpServicios
+            // 
+            flpServicios.AutoScroll = true;
+            flpServicios.Location = new Point(98, 34);
+            flpServicios.Name = "flpServicios";
+            flpServicios.Size = new Size(809, 558);
+            flpServicios.TabIndex = 0;
+            // 
             // pictureBox1
             // 
             pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
@@ -148,6 +156,7 @@
             panelCalendario.Name = "panelCalendario";
             panelCalendario.Size = new Size(230, 50);
             panelCalendario.TabIndex = 1;
+            panelCalendario.MouseClick += panelCalendario_MouseClick;
             // 
             // label3
             // 
@@ -232,13 +241,6 @@
             label5.Size = new Size(86, 23);
             label5.TabIndex = 0;
             label5.Text = "Clientes";
-            // 
-            // flpServicios
-            // 
-            flpServicios.Location = new Point(21, 34);
-            flpServicios.Name = "flpServicios";
-            flpServicios.Size = new Size(954, 558);
-            flpServicios.TabIndex = 0;
             // 
             // FrmServicios
             // 
