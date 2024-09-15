@@ -49,6 +49,14 @@ namespace MapacheBigoton.Repository
 
             return citas;
         }
+        public bool AgregarCita()
+        {
+            using (SqlConnection connection = _databaseConnection.GetConnection())
+            {
+
+            }
+            return true;
+        }
 
     }
 
