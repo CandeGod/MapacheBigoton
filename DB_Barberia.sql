@@ -66,11 +66,16 @@ INSERT INTO TBBarbero (NombreBarbero) VALUES ('María Gómez');
 
 
 
-INSERT INTO TBServicio (NombreServicio, DescripcionServicio, CostoServicio) VALUES ('Corte de Cabello', 'Corte de cabello estándar', 150.00);
-INSERT INTO TBServicio (NombreServicio, DescripcionServicio, CostoServicio) VALUES ('Afeitado', 'Afeitado con navaja', 100.00);
-INSERT INTO TBServicio (NombreServicio, DescripcionServicio, CostoServicio) VALUES ('Tinte de Cabello', 'Tinte de cabello completo', 200.00);
-INSERT INTO TBServicio (NombreServicio, DescripcionServicio, CostoServicio) VALUES ('Corte y Afeitado', 'Corte de cabello y afeitado', 220.00);
-INSERT INTO TBServicio (NombreServicio, DescripcionServicio, CostoServicio) VALUES ('Masaje Capilar', 'Masaje relajante para el cuero cabelludo', 80.00);
+INSERT INTO TBServicio (NombreServicio, DescripcionServicio, CostoServicio) VALUES
+('Corte de cabello', 'Un corte a la medida de tu estilo, realizado por profesionales que entienden las últimas tendencias y técnicas.', 15.00),
+('Arreglo de barba', 'Define y perfila tu barba con precisión para un look impecable, ya sea que prefieras un estilo clásico o moderno.', 12.00),
+('Tinte para barba', 'Dale un nuevo tono a tu barba, ya sea para cubrir las canas o para un cambio de estilo audaz.', 18.00),
+('Corte de puntas y peinado', 'Mantén tu cabello sano con un corte de puntas y termina con un peinado elegante para cualquier ocasión.', 22.00),
+('Afeitado clásico con navaja', 'Experiencia tradicional con navaja recta, acompañado de toallas calientes para un afeitado suave y cómodo.', 25.00),
+('Corte de cabello y barba', 'Un paquete completo para mantener tu cabello y barba en perfecto estado, todo en una sola visita.', 20.00),
+('Lavado y corte', 'Un tratamiento de lavado profesional seguido de un corte personalizado, asegurando frescura y estilo.', 10.00),
+('Tratamiento capilar hidratante', 'Repara y revitaliza tu cabello con un tratamiento profundo que le devolverá brillo, suavidad y salud.', 30.00);
+
 
 
 
