@@ -28,75 +28,104 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            comboBox1 = new ComboBox();
-            comboBox2 = new ComboBox();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            cbBarberos = new ComboBox();
+            cbServicios = new ComboBox();
+            dtFecha = new DateTimePicker();
+            bAgendar = new Button();
+            numHora = new NumericUpDown();
+            numMinu = new NumericUpDown();
+            cbClientes = new ComboBox();
+            ((System.ComponentModel.ISupportInitialize)numHora).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numMinu).BeginInit();
             SuspendLayout();
             // 
-            // button1
+            // cbBarberos
             // 
-            button1.Location = new Point(56, 202);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            cbBarberos.FormattingEnabled = true;
+            cbBarberos.Location = new Point(67, 133);
+            cbBarberos.Name = "cbBarberos";
+            cbBarberos.Size = new Size(234, 23);
+            cbBarberos.TabIndex = 1;
             // 
-            // comboBox1
+            // cbServicios
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(56, 109);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 1;
+            cbServicios.FormattingEnabled = true;
+            cbServicios.Location = new Point(67, 162);
+            cbServicios.Name = "cbServicios";
+            cbServicios.Size = new Size(234, 23);
+            cbServicios.TabIndex = 2;
             // 
-            // comboBox2
+            // dtFecha
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(56, 159);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(121, 23);
-            comboBox2.TabIndex = 2;
+            dtFecha.Location = new Point(67, 75);
+            dtFecha.Name = "dtFecha";
+            dtFecha.Size = new Size(234, 23);
+            dtFecha.TabIndex = 5;
             // 
-            // textBox1
+            // bAgendar
             // 
-            textBox1.Location = new Point(56, 20);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 3;
+            bAgendar.Location = new Point(67, 191);
+            bAgendar.Name = "bAgendar";
+            bAgendar.Size = new Size(75, 23);
+            bAgendar.TabIndex = 6;
+            bAgendar.Text = "Agendar";
+            bAgendar.UseVisualStyleBackColor = true;
+            bAgendar.Click += bAgendar_Click;
             // 
-            // textBox2
+            // numHora
             // 
-            textBox2.Location = new Point(56, 69);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(100, 23);
-            textBox2.TabIndex = 4;
+            numHora.Location = new Point(67, 46);
+            numHora.Maximum = new decimal(new int[] { 17, 0, 0, 0 });
+            numHora.Minimum = new decimal(new int[] { 9, 0, 0, 0 });
+            numHora.Name = "numHora";
+            numHora.Size = new Size(36, 23);
+            numHora.TabIndex = 7;
+            numHora.Value = new decimal(new int[] { 9, 0, 0, 0 });
+            // 
+            // numMinu
+            // 
+            numMinu.Increment = new decimal(new int[] { 15, 0, 0, 0 });
+            numMinu.Location = new Point(109, 46);
+            numMinu.Maximum = new decimal(new int[] { 45, 0, 0, 0 });
+            numMinu.Name = "numMinu";
+            numMinu.Size = new Size(36, 23);
+            numMinu.TabIndex = 8;
+            // 
+            // cbClientes
+            // 
+            cbClientes.FormattingEnabled = true;
+            cbClientes.Location = new Point(67, 104);
+            cbClientes.Name = "cbClientes";
+            cbClientes.Size = new Size(234, 23);
+            cbClientes.TabIndex = 9;
             // 
             // frmAgendar
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Controls.Add(comboBox2);
-            Controls.Add(comboBox1);
-            Controls.Add(button1);
+            ClientSize = new Size(725, 585);
+            Controls.Add(cbClientes);
+            Controls.Add(numMinu);
+            Controls.Add(numHora);
+            Controls.Add(bAgendar);
+            Controls.Add(dtFecha);
+            Controls.Add(cbServicios);
+            Controls.Add(cbBarberos);
             Name = "frmAgendar";
             Text = "frmAgendar";
             Load += frmAgendar_Load;
+            ((System.ComponentModel.ISupportInitialize)numHora).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numMinu).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private Button button1;
-        private ComboBox comboBox1;
-        private ComboBox comboBox2;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private ComboBox cbBarberos;
+        private ComboBox cbServicios;
+        private DateTimePicker dtFecha;
+        private Button bAgendar;
+        private NumericUpDown numHora;
+        private NumericUpDown numMinu;
+        private ComboBox cbClientes;
     }
 }

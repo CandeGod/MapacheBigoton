@@ -3,9 +3,11 @@ using MapacheBigoton.Connection;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlTypes;
 
 namespace MapacheBigoton.Repository
 {
@@ -37,6 +39,7 @@ namespace MapacheBigoton.Repository
                 {
                     Cita cita = new Cita
                     {
+
                         Fecha = reader.GetDateTime(0),
                         Client = new Client { NombreCliente = reader.GetString(1) },
                         Barber = new Barber { NombreBarbero = reader.GetString(2) },
@@ -49,13 +52,23 @@ namespace MapacheBigoton.Repository
 
             return citas;
         }
-        public bool AgregarCita()
+        public void AgregarCita(TimeSpan Hora, DateTime Fecha, int idCliente, int idBarbero, int idServicio)
         {
             using (SqlConnection connection = _databaseConnection.GetConnection())
             {
-
+                using (SqlCommand cmd = new SqlCommand("InsertarCita", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@Hora", SqlDbType.Time).Value = Hora;
+                    cmd.Parameters.Add("@Fecha", SqlDbType.Date).Value = Fecha;
+                    cmd.Parameters.Add("@IdCliente", SqlDbType.Int).Value = idCliente;
+                    cmd.Parameters.Add("@IdBarbero", SqlDbType.Int).Value = idBarbero;
+                    cmd.Parameters.Add("@IdServicio", SqlDbType.Int).Value = idServicio;
+                    cmd.ExecuteNonQuery();
+                }
+                
+                
             }
-            return true;
         }
 
     }

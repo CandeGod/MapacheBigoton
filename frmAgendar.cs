@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MapacheBigoton.Connection;
+using MapacheBigoton.Repository;
+using MapacheBigoton.Class;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,14 +15,74 @@ namespace MapacheBigoton
 {
     public partial class frmAgendar : Form
     {
+        private readonly ClienteRepository _clienteRepository;
+        private readonly BarberoRepository _barberoRepository;
+        private readonly ServiceRepository _serviceRepository;
+        private readonly CitaRepository _citaRepository;
+        List<Client> clientes;
+        List<Barber> barberos;
+        List<Service> servicios;
         public frmAgendar()
         {
             InitializeComponent();
+            _clienteRepository = new ClienteRepository(new DatabaseConnection());
+            _barberoRepository = new BarberoRepository(new DatabaseConnection());
+            _serviceRepository = new ServiceRepository(new DatabaseConnection());
+            _citaRepository = new CitaRepository(new DatabaseConnection());
+            CargarClientes();
+            CargarBarberos();
+            CargarServicios();
+        }
+
+        public void CargarClientes()
+        {
+            cbClientes.Items.Clear();
+            clientes = _clienteRepository.ObtenerClientes();
+            string ncliente = "";
+            foreach (Client cliente in clientes)
+            {
+                ncliente = cliente.NombreCliente + ", " + cliente.TelefonoCliente;
+                cbClientes.Items.Add(ncliente);
+            }
+        }
+
+        public void CargarBarberos()
+        {
+            cbBarberos.Items.Clear();
+            barberos = _barberoRepository.ObtenerBarberos();
+            foreach(Barber barbero in barberos)
+            {
+                cbBarberos.Items.Add(barbero.NombreBarbero);
+            }
+        }
+
+        public void CargarServicios()
+        {
+            cbServicios.Items.Clear();
+            servicios = _serviceRepository.ObtenerServicios();
+            foreach (Service servicio in servicios)
+            {
+                cbServicios.Items.Add(servicio.NombreServicio);
+            }
         }
 
         private void frmAgendar_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void bAgendar_Click(object sender, EventArgs e)
+        {
+            DateTime fecha = dtFecha.Value;
+            int hora = ((int)numHora.Value);
+            int minutos = ((int)numMinu.Value);
+            TimeSpan horas = new TimeSpan(hora, minutos, 0);
+            Client cliente = clientes.ElementAt(cbClientes.SelectedIndex);
+            Barber barbero = barberos.ElementAt(cbBarberos.SelectedIndex);
+            Service servicio = servicios.ElementAt(cbServicios.SelectedIndex);
+            _citaRepository.AgregarCita(horas, fecha, cliente.IdCliente, barbero.IdBarbero, servicio.IdServicio);
+            MessageBox.Show("Cita realizada");
+            MessageBox.Show(cliente.NombreCliente + cliente.TelefonoCliente+ cliente.IdCliente);
         }
     }
 }
