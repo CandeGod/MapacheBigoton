@@ -19,6 +19,7 @@ namespace MapacheBigoton
         private readonly BarberoRepository _barberoRepository;
         private readonly ServiceRepository _serviceRepository;
         private readonly CitaRepository _citaRepository;
+        Client clienteAux;
         List<Client> clientes;
         List<Barber> barberos;
         List<Service> servicios;
@@ -50,7 +51,7 @@ namespace MapacheBigoton
         {
             cbBarberos.Items.Clear();
             barberos = _barberoRepository.ObtenerBarberos();
-            foreach(Barber barbero in barberos)
+            foreach (Barber barbero in barberos)
             {
                 cbBarberos.Items.Add(barbero.NombreBarbero);
             }
@@ -71,18 +72,30 @@ namespace MapacheBigoton
 
         }
 
+        public void CambiarCliente(Client client)
+        {
+            this.clienteAux = client;
+            string ncliente = clienteAux.NombreCliente + ", " + clienteAux.TelefonoCliente;
+            cbClientes.Text = ncliente;
+        }
+
         private void bAgendar_Click(object sender, EventArgs e)
         {
             DateTime fecha = dtFecha.Value;
             int hora = ((int)numHora.Value);
             int minutos = ((int)numMinu.Value);
             TimeSpan horas = new TimeSpan(hora, minutos, 0);
-            Client cliente = clientes.ElementAt(cbClientes.SelectedIndex);
+            clienteAux = clientes.ElementAt(cbClientes.SelectedIndex);
             Barber barbero = barberos.ElementAt(cbBarberos.SelectedIndex);
             Service servicio = servicios.ElementAt(cbServicios.SelectedIndex);
-            _citaRepository.AgregarCita(horas, fecha, cliente.IdCliente, barbero.IdBarbero, servicio.IdServicio);
+            _citaRepository.AgregarCita(horas, fecha, clienteAux.IdCliente, barbero.IdBarbero, servicio.IdServicio);
             MessageBox.Show("Cita realizada");
-            MessageBox.Show(cliente.NombreCliente + cliente.TelefonoCliente+ cliente.IdCliente);
+        }
+
+        private void bBuscarClient_Click(object sender, EventArgs e)
+        {
+            frmBuscarCliente frm = new frmBuscarCliente(this);
+            frm.Show();
         }
     }
 }
