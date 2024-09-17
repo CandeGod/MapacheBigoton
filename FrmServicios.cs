@@ -75,5 +75,29 @@ namespace MapacheBigoton
             FrmAgregarServicio frmAgregarServicio = new FrmAgregarServicio(this); // Pasa "this" como referencia
             frmAgregarServicio.ShowDialog();
         }
+
+        private void label3_MouseClick(object sender, MouseEventArgs e)
+        {
+            FrmCitas frmCitas = new FrmCitas();
+            this.Hide();
+            frmCitas.Show();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Estas en servicios");
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+            MessageBox.Show("Estas en servicios");
+        }
+
+        private void lClientes_Click(object sender, EventArgs e)
+        {
+            frmAgendar frmAgendar = new frmAgendar();
+            this.Hide();
+            frmAgendar.Show();
+        }
     }
 }
