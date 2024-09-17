@@ -75,5 +75,11 @@ namespace MapacheBigoton
             FrmAgregarServicio frmAgregarServicio = new FrmAgregarServicio(this); // Pasa "this" como referencia
             frmAgregarServicio.ShowDialog();
         }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            FrmBarbero barbero = new FrmBarbero();
+            barbero.Show();
+        }
     }
 }
