@@ -39,7 +39,7 @@ namespace MapacheBigoton
             CargarServicios();
         }
 
-        private void CargarServicios()
+        public void CargarServicios()
         {
             List<Service> services = _servicioRepository.ObtenerServicios();
             flpServicios.Controls.Clear();
@@ -68,6 +68,12 @@ namespace MapacheBigoton
             this.Hide();
             frmCitas.Show();
 
+        }
+
+        private void btnAgregarServicio_Click(object sender, EventArgs e)
+        {
+            FrmAgregarServicio frmAgregarServicio = new FrmAgregarServicio(this); // Pasa "this" como referencia
+            frmAgregarServicio.ShowDialog();
         }
     }
 }

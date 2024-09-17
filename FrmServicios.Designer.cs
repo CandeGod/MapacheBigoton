@@ -32,6 +32,7 @@
             panelIzquierda = new Panel();
             lblMapaches = new Label();
             panel1 = new Panel();
+            btnAgregarServicio = new Button();
             label2 = new Label();
             label1 = new Label();
             panelServicios = new Panel();
@@ -91,12 +92,24 @@
             // 
             panel1.BackColor = Color.White;
             panel1.BorderStyle = BorderStyle.Fixed3D;
+            panel1.Controls.Add(btnAgregarServicio);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
             panel1.Location = new Point(230, 50);
             panel1.Name = "panel1";
             panel1.Size = new Size(1034, 100);
             panel1.TabIndex = 2;
+            // 
+            // btnAgregarServicio
+            // 
+            btnAgregarServicio.Font = new Font("Verdana", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAgregarServicio.Location = new Point(819, 22);
+            btnAgregarServicio.Name = "btnAgregarServicio";
+            btnAgregarServicio.Size = new Size(100, 50);
+            btnAgregarServicio.TabIndex = 2;
+            btnAgregarServicio.Text = "Agregar Servicio";
+            btnAgregarServicio.UseVisualStyleBackColor = true;
+            btnAgregarServicio.Click += btnAgregarServicio_Click;
             // 
             // label2
             // 
@@ -253,6 +266,7 @@
             Controls.Add(panelTop);
             Controls.Add(panelMenu);
             Name = "FrmServicios";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Servicios";
             panelTop.ResumeLayout(false);
             panelIzquierda.ResumeLayout(false);
@@ -292,5 +306,6 @@
         private Panel panel3;
         private Label label5;
         private FlowLayoutPanel flpServicios;
+        private Button btnAgregarServicio;
     }
 }
