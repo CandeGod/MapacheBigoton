@@ -32,9 +32,11 @@
             panelIzquierda = new Panel();
             lblMapaches = new Label();
             panel1 = new Panel();
+            btnAgregarServicio = new Button();
             label2 = new Label();
             label1 = new Label();
             panelServicios = new Panel();
+            flpServicios = new FlowLayoutPanel();
             pictureBox1 = new PictureBox();
             panelCalendario = new Panel();
             label3 = new Label();
@@ -43,9 +45,8 @@
             panelMenu = new Panel();
             panel4 = new Panel();
             label6 = new Label();
-            panel3 = new Panel();
-            label5 = new Label();
-            flpServicios = new FlowLayoutPanel();
+            pClientes = new Panel();
+            lClientes = new Label();
             panelTop.SuspendLayout();
             panelIzquierda.SuspendLayout();
             panel1.SuspendLayout();
@@ -55,7 +56,7 @@
             panel2.SuspendLayout();
             panelMenu.SuspendLayout();
             panel4.SuspendLayout();
-            panel3.SuspendLayout();
+            pClientes.SuspendLayout();
             SuspendLayout();
             // 
             // panelTop
@@ -91,12 +92,24 @@
             // 
             panel1.BackColor = Color.White;
             panel1.BorderStyle = BorderStyle.Fixed3D;
+            panel1.Controls.Add(btnAgregarServicio);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
             panel1.Location = new Point(230, 50);
             panel1.Name = "panel1";
             panel1.Size = new Size(1034, 100);
             panel1.TabIndex = 2;
+            // 
+            // btnAgregarServicio
+            // 
+            btnAgregarServicio.Font = new Font("Verdana", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAgregarServicio.Location = new Point(819, 22);
+            btnAgregarServicio.Name = "btnAgregarServicio";
+            btnAgregarServicio.Size = new Size(100, 50);
+            btnAgregarServicio.TabIndex = 2;
+            btnAgregarServicio.Text = "Agregar Servicio";
+            btnAgregarServicio.UseVisualStyleBackColor = true;
+            btnAgregarServicio.Click += btnAgregarServicio_Click;
             // 
             // label2
             // 
@@ -129,6 +142,14 @@
             panelServicios.Size = new Size(1000, 630);
             panelServicios.TabIndex = 3;
             // 
+            // flpServicios
+            // 
+            flpServicios.AutoScroll = true;
+            flpServicios.Location = new Point(98, 34);
+            flpServicios.Name = "flpServicios";
+            flpServicios.Size = new Size(809, 558);
+            flpServicios.TabIndex = 0;
+            // 
             // pictureBox1
             // 
             pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
@@ -148,6 +169,7 @@
             panelCalendario.Name = "panelCalendario";
             panelCalendario.Size = new Size(230, 50);
             panelCalendario.TabIndex = 1;
+            panelCalendario.MouseClick += panelCalendario_MouseClick;
             // 
             // label3
             // 
@@ -159,6 +181,7 @@
             label3.Size = new Size(112, 23);
             label3.TabIndex = 0;
             label3.Text = "Calendario";
+            label3.MouseClick += label3_MouseClick;
             // 
             // panel2
             // 
@@ -168,6 +191,8 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(230, 50);
             panel2.TabIndex = 2;
+            panel2.Click += label4_Click;
+            panel2.Paint += panel2_Paint;
             // 
             // label4
             // 
@@ -179,12 +204,13 @@
             label4.Size = new Size(97, 23);
             label4.TabIndex = 0;
             label4.Text = "Servicios";
+            label4.Click += label4_Click;
             // 
             // panelMenu
             // 
             panelMenu.BackColor = Color.FromArgb(34, 45, 50);
             panelMenu.Controls.Add(panel4);
-            panelMenu.Controls.Add(panel3);
+            panelMenu.Controls.Add(pClientes);
             panelMenu.Controls.Add(panel2);
             panelMenu.Controls.Add(panelCalendario);
             panelMenu.Controls.Add(pictureBox1);
@@ -213,32 +239,26 @@
             label6.TabIndex = 0;
             label6.Text = "Barberos";
             // 
-            // panel3
+            // pClientes
             // 
-            panel3.Controls.Add(label5);
-            panel3.Location = new Point(0, 259);
-            panel3.Margin = new Padding(0);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(230, 50);
-            panel3.TabIndex = 3;
+            pClientes.Controls.Add(lClientes);
+            pClientes.Location = new Point(0, 259);
+            pClientes.Margin = new Padding(0);
+            pClientes.Name = "pClientes";
+            pClientes.Size = new Size(230, 50);
+            pClientes.TabIndex = 3;
             // 
-            // label5
+            // lClientes
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Verdana", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.ForeColor = SystemColors.Window;
-            label5.Location = new Point(49, 14);
-            label5.Name = "label5";
-            label5.Size = new Size(86, 23);
-            label5.TabIndex = 0;
-            label5.Text = "Clientes";
-            // 
-            // flpServicios
-            // 
-            flpServicios.Location = new Point(21, 34);
-            flpServicios.Name = "flpServicios";
-            flpServicios.Size = new Size(954, 558);
-            flpServicios.TabIndex = 0;
+            lClientes.AutoSize = true;
+            lClientes.Font = new Font("Verdana", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lClientes.ForeColor = SystemColors.Window;
+            lClientes.Location = new Point(49, 14);
+            lClientes.Name = "lClientes";
+            lClientes.Size = new Size(86, 23);
+            lClientes.TabIndex = 0;
+            lClientes.Text = "Clientes";
+            lClientes.Click += lClientes_Click;
             // 
             // FrmServicios
             // 
@@ -251,6 +271,7 @@
             Controls.Add(panelTop);
             Controls.Add(panelMenu);
             Name = "FrmServicios";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Servicios";
             panelTop.ResumeLayout(false);
             panelIzquierda.ResumeLayout(false);
@@ -266,8 +287,8 @@
             panelMenu.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
+            pClientes.ResumeLayout(false);
+            pClientes.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -287,8 +308,9 @@
         private Panel panelMenu;
         private Panel panel4;
         private Label label6;
-        private Panel panel3;
-        private Label label5;
+        private Panel pClientes;
+        private Label lClientes;
         private FlowLayoutPanel flpServicios;
+        private Button btnAgregarServicio;
     }
 }
