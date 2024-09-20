@@ -39,55 +39,62 @@
             // lblServicio
             // 
             lblServicio.AutoSize = true;
-            lblServicio.Location = new Point(136, 46);
+            lblServicio.Font = new Font("Verdana", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblServicio.Location = new Point(23, 35);
             lblServicio.Name = "lblServicio";
-            lblServicio.Size = new Size(98, 15);
+            lblServicio.Size = new Size(113, 14);
             lblServicio.TabIndex = 0;
             lblServicio.Text = "Nombre Servicio:";
             // 
             // lblPrecio
             // 
             lblPrecio.AutoSize = true;
-            lblPrecio.Location = new Point(276, 9);
+            lblPrecio.Font = new Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPrecio.Location = new Point(207, 152);
             lblPrecio.Name = "lblPrecio";
-            lblPrecio.Size = new Size(43, 15);
+            lblPrecio.Size = new Size(54, 14);
             lblPrecio.TabIndex = 1;
             lblPrecio.Text = "Precio:";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(41, 46);
+            label1.Font = new Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(23, 21);
             label1.Name = "label1";
-            label1.Size = new Size(98, 15);
+            label1.Size = new Size(122, 14);
             label1.TabIndex = 3;
             label1.Text = "Nombre Servicio:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(227, 9);
+            label2.Font = new Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(134, 152);
             label2.Name = "label2";
-            label2.Size = new Size(43, 15);
+            label2.Size = new Size(54, 14);
             label2.TabIndex = 4;
             label2.Text = "Precio:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(41, 66);
+            label3.Font = new Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(23, 61);
             label3.Name = "label3";
-            label3.Size = new Size(116, 15);
+            label3.Size = new Size(147, 14);
             label3.TabIndex = 5;
             label3.Text = "Descripción Servicio:";
             // 
             // richDescripcionServicio
             // 
-            richDescripcionServicio.BorderStyle = BorderStyle.None;
-            richDescripcionServicio.Location = new Point(41, 94);
+            richDescripcionServicio.BorderStyle = BorderStyle.FixedSingle;
+            richDescripcionServicio.Font = new Font("Verdana", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            richDescripcionServicio.Location = new Point(23, 92);
             richDescripcionServicio.Name = "richDescripcionServicio";
             richDescripcionServicio.ReadOnly = true;
-            richDescripcionServicio.Size = new Size(305, 67);
+            richDescripcionServicio.ScrollBars = RichTextBoxScrollBars.Vertical;
+            richDescripcionServicio.Size = new Size(238, 50);
             richDescripcionServicio.TabIndex = 6;
             richDescripcionServicio.TabStop = false;
             richDescripcionServicio.Text = "";
@@ -104,7 +111,7 @@
             Controls.Add(lblPrecio);
             Controls.Add(lblServicio);
             Name = "UserControlServicio";
-            Size = new Size(378, 164);
+            Size = new Size(280, 174);
             Paint += UserControlServicio_Paint;
             ResumeLayout(false);
             PerformLayout();
