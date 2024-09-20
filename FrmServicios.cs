@@ -76,6 +76,7 @@ namespace MapacheBigoton
             frmAgregarServicio.ShowDialog();
         }
 
+<<<<<<< HEAD
         private void label3_MouseClick(object sender, MouseEventArgs e)
         {
             FrmCitas frmCitas = new FrmCitas();
@@ -98,6 +99,12 @@ namespace MapacheBigoton
             frmAgendar frmAgendar = new frmAgendar();
             this.Hide();
             frmAgendar.Show();
+=======
+        private void label6_Click(object sender, EventArgs e)
+        {
+            FrmBarbero barbero = new FrmBarbero();
+            barbero.Show();
+>>>>>>> Rama-de-SaulS
         }
     }
 }
