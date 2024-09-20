@@ -76,6 +76,7 @@ namespace MapacheBigoton
             frmAgregarServicio.ShowDialog();
         }
 
+
         private void label3_MouseClick(object sender, MouseEventArgs e)
         {
             FrmCitas frmCitas = new FrmCitas();
@@ -98,6 +99,7 @@ namespace MapacheBigoton
             frmAgendar frmAgendar = new frmAgendar();
             this.Hide();
             frmAgendar.Show();
+
         }
     }
 }

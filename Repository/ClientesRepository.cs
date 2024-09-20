@@ -2,26 +2,26 @@
 using MapacheBigoton.Connection;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MapacheBigoton.Repository
 {
-    public class BarberoRepository
+    public class ClientesRepository
     {
         private readonly DatabaseConnection _databaseConnection;
 
-        public BarberoRepository(DatabaseConnection databaseConnection)
+        public ClientesRepository(DatabaseConnection databaseConnection)
         {
             _databaseConnection = databaseConnection;
         }
 
-        public List<Barber> ObtenerBarberos()
+        public List<Client> ObtenerClientes()
         {
-            List<Barber> barbers = new List<Barber>();
+            List<Client> clientes = new List<Client>();
 
             using (SqlConnection connection = _databaseConnection.GetConnection())
             {
@@ -29,30 +29,29 @@ namespace MapacheBigoton.Repository
                 {
                     connection.Open();
                 }
-                string query = "SELECT B.NombreBarbero, C.IdBarbero " +
-                               "FROM TBBarbero C " +
-                               "JOIN TBBarbero CL ON C.IdBarbero = CL.IdBarbero " +
-                               "JOIN TBBarbero B ON C.IdBarbero = B.IdBarbero";
+                string query = "SELECT IdCliente, NombreCliente, TelefonoCliente FROM TBCliente";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    Barber barber = new Barber
+                    Client cliente = new Client
                     {
-                        NombreBarbero = reader.GetString(0),
-                        IdBarbero = reader.GetInt32(1)
+                        IdCliente = reader.GetInt32(0),
+                        NombreCliente = reader.GetString(1),
+                        TelefonoCliente = reader.GetString(2)
                     };
 
-                    barbers.Add(barber);
+                    clientes.Add(cliente);
                 }
-            } // La conexión se cierra automáticamente aquí
+            }
 
-            return barbers;
+            return clientes;
         }
 
-        public void AgregarBarbero(Barber barber)
+
+        public void AgregarCliente(Client cliente)
         {
             using (SqlConnection connection = _databaseConnection.GetConnection())
             {
@@ -62,14 +61,14 @@ namespace MapacheBigoton.Repository
                     {
                         connection.Open();
                     }
-                    string query = "INSERT INTO TBBarbero (NombreBarbero) VALUES (@NombreBarbero)";
+                    string query = "INSERT INTO TBCliente (NombreCliente, TelefonoCliente) VALUES (@NombreCliente, @TelefonoCliente)";
                     SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@NombreBarbero", barber.NombreBarbero);
+                    command.Parameters.AddWithValue("@NombreCliente", cliente.NombreCliente);
+                    command.Parameters.AddWithValue("@TelefonoCliente", cliente.TelefonoCliente);
                     command.ExecuteNonQuery();
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de la excepción
                     Console.WriteLine(ex.Message);
                 }
                 finally
@@ -79,7 +78,9 @@ namespace MapacheBigoton.Repository
                         connection.Close();
                     }
                 }
-            } // La conexión se cierra automáticamente aquí
-        }
+            } 
+        }
+
+
     }
 }
