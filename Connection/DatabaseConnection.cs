@@ -13,7 +13,7 @@ namespace MapacheBigoton.Connection
         public SqlConnection GetConnection()
         {
             //Cambiar unicamente el nombre de su servidor de la base de datos de sql y tener la bd creada
-            SqlConnection connection = new SqlConnection("SERVER=DELL\\CANDE;DATABASE=DB_Barberias;Integrated Security=True;TrustServerCertificate=True;");
+            SqlConnection connection = new SqlConnection("SERVER=DESKTOP-UQELRD8;DATABASE=DB_Barberias;Integrated Security=True;TrustServerCertificate=True;");
             connection.Open();
 
             return connection;
