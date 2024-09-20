@@ -65,7 +65,7 @@
             panelTop.Controls.Add(panelIzquierda);
             panelTop.Location = new Point(0, 0);
             panelTop.Name = "panelTop";
-            panelTop.Size = new Size(1264, 50);
+            panelTop.Size = new Size(1060, 50);
             panelTop.TabIndex = 1;
             // 
             // panelIzquierda
@@ -97,13 +97,13 @@
             panel1.Controls.Add(label1);
             panel1.Location = new Point(230, 50);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1034, 100);
+            panel1.Size = new Size(830, 100);
             panel1.TabIndex = 2;
             // 
             // btnAgregarServicio
             // 
             btnAgregarServicio.Font = new Font("Verdana", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAgregarServicio.Location = new Point(819, 22);
+            btnAgregarServicio.Location = new Point(514, 22);
             btnAgregarServicio.Name = "btnAgregarServicio";
             btnAgregarServicio.Size = new Size(100, 50);
             btnAgregarServicio.TabIndex = 2;
@@ -137,17 +137,17 @@
             // 
             panelServicios.BackColor = Color.White;
             panelServicios.Controls.Add(flpServicios);
-            panelServicios.Location = new Point(244, 157);
+            panelServicios.Location = new Point(249, 171);
             panelServicios.Name = "panelServicios";
-            panelServicios.Size = new Size(1000, 630);
+            panelServicios.Size = new Size(597, 353);
             panelServicios.TabIndex = 3;
             // 
             // flpServicios
             // 
             flpServicios.AutoScroll = true;
-            flpServicios.Location = new Point(98, 34);
+            flpServicios.Location = new Point(3, 3);
             flpServicios.Name = "flpServicios";
-            flpServicios.Size = new Size(809, 558);
+            flpServicios.Size = new Size(591, 347);
             flpServicios.TabIndex = 0;
             // 
             // pictureBox1
@@ -265,7 +265,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(231, 231, 231);
-            ClientSize = new Size(1264, 793);
+            ClientSize = new Size(884, 561);
             Controls.Add(panelServicios);
             Controls.Add(panel1);
             Controls.Add(panelTop);
