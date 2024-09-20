@@ -17,10 +17,13 @@ namespace MapacheBigoton
     public partial class FrmCitas : Form
     {
         private readonly CitaRepository _citaRepository;
+        private readonly Random _random;
+
         public FrmCitas()
         {
             InitializeComponent();
             _citaRepository = new CitaRepository(new DatabaseConnection());
+            _random = new Random();
             CargarCitas();
         }
 
@@ -36,9 +39,18 @@ namespace MapacheBigoton
                 UserControlCitaAgendada userControl = new UserControlCitaAgendada();
                 userControl.CargarDatos(cita);
                 userControl.Dock = DockStyle.Top; // Asegúrate de que los controles se apilen verticalmente
+
+                // Asigna un color aleatorio al fondo del control
+                userControl.BackColor = Color.FromArgb(_random.Next(256), _random.Next(256), _random.Next(256));
+
                 flowLayoutPanel1.Controls.Add(userControl);
             }
         }
 
+        private void btnAgendarCita_Click(object sender, EventArgs e)
+        {
+            frmAgendar frmAgendar = new frmAgendar();
+            frmAgendar.ShowDialog();
+        }
     }
 }
