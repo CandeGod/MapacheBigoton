@@ -63,9 +63,9 @@ namespace MapacheBigoton.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap usuario {
+        internal static System.Drawing.Bitmap mapacheBigoton {
             get {
-                object obj = ResourceManager.GetObject("usuario", resourceCulture);
+                object obj = ResourceManager.GetObject("mapacheBigoton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
