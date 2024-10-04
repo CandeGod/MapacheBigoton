@@ -12,7 +12,6 @@ namespace MapacheBigoton.Class
         public string NombreServicio { get; set; }
         public string DescripcionServicio { get; set; }
         public decimal CostoServicio { get; set; }
-
-
+        public Sucursal Sucursal { get; set; }
     }
 }
