@@ -18,16 +18,18 @@ namespace MapacheBigoton
 
     {
         private readonly BarberoRepository _barberoRepository;
+        Sucursal sucursal;
 
-        public FrmBarbero()
+        public FrmBarbero(Sucursal sucursal)
         {
             InitializeComponent();
+            this.sucursal = sucursal;
             _barberoRepository = new BarberoRepository(new DatabaseConnection());
             CargarBarberos();
         }
         private void CargarBarberos()
         {
-            List<Barber> barberos = _barberoRepository.ObtenerBarberos();
+            List<Barber> barberos = _barberoRepository.ObtenerBarberos(sucursal.IdSucursal);
 
             // Limpia el panel antes de agregar los controles
             flowLayoutPanel1.Controls.Clear();
@@ -68,7 +70,7 @@ namespace MapacheBigoton
 
         private void label6_Click(object sender, EventArgs e)
         {
-            FrmServicios servicios = new FrmServicios();
+            FrmServicios servicios = new FrmServicios(sucursal);
             servicios.Show();
         }
 
@@ -77,6 +79,7 @@ namespace MapacheBigoton
             // Crear un nuevo barbero
             Barber nuevoBarbero = new Barber
             {
+                IdSucursal = sucursal.IdSucursal,
                 NombreBarbero = txtNombreB.Text
             };
 

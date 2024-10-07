@@ -18,12 +18,12 @@ namespace MapacheBigoton.Controls
             InitializeComponent();
         }
 
-        public void CargarDatos(Cita cita)
+        public void CargarDatos(Cita cita,Client cliente, Barber barbero, Service Servicio)
         {
             lblFecha.Text = cita.Fecha.ToString("dd/MM/yyyy");
-            lblCliente.Text = cita.Client.NombreCliente;
-            lblBarbero.Text = cita.Barber.NombreBarbero;
-            lblServicio.Text = cita.Service.NombreServicio;
+            lblCliente.Text = cliente.NombreCliente;
+            lblBarbero.Text = barbero.NombreBarbero;
+            lblServicio.Text = Servicio.NombreServicio;
         }
     }
 }

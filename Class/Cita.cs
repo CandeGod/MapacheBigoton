@@ -12,9 +12,9 @@ namespace MapacheBigoton.Class
         public int IdSucursal { get; set; }
         public TimeSpan Hora { get; set; }
         public DateTime Fecha { get; set; }
-        public Client Client { get; set; }
-        public Barber Barber { get; set; }
-        public Service Service { get; set; }
+        public int idClient { get; set; }
+        public int idBarber { get; set; }
+        public int idService { get; set; }
     }
 
 }

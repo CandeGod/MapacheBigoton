@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace MapacheBigoton.Repository
 {
@@ -19,7 +20,7 @@ namespace MapacheBigoton.Repository
             _databaseConnection = databaseConnection;
         }
 
-        public List<Barber> ObtenerBarberos()
+        public List<Barber> ObtenerBarberos(int idSucursal)
         {
             List<Barber> barbers = new List<Barber>();
 
@@ -29,10 +30,7 @@ namespace MapacheBigoton.Repository
                 {
                     connection.Open();
                 }
-                string query = "SELECT B.NombreBarbero, C.IdBarbero " +
-                               "FROM TBBarbero C " +
-                               "JOIN TBBarbero CL ON C.IdBarbero = CL.IdBarbero " +
-                               "JOIN TBBarbero B ON C.IdBarbero = B.IdBarbero";
+                string query = "SELECT * FROM TBBarbero WHERE idSucursal = " + idSucursal;
 
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
@@ -41,8 +39,9 @@ namespace MapacheBigoton.Repository
                 {
                     Barber barber = new Barber
                     {
-                        NombreBarbero = reader.GetString(0),
-                        IdBarbero = reader.GetInt32(1)
+                        IdBarbero = reader.GetInt32(0),
+                        IdSucursal = reader.GetInt32(1),
+                        NombreBarbero = reader.GetString(2)
                     };
 
                     barbers.Add(barber);
@@ -62,8 +61,9 @@ namespace MapacheBigoton.Repository
                     {
                         connection.Open();
                     }
-                    string query = "INSERT INTO TBBarbero (NombreBarbero) VALUES (@NombreBarbero)";
+                    string query = "INSERT INTO TBBarbero (idSucursal, NombreBarbero) VALUES (@idSucursal, @NombreBarbero)";
                     SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@idSucursal", barber.IdSucursal);
                     command.Parameters.AddWithValue("@NombreBarbero", barber.NombreBarbero);
                     command.ExecuteNonQuery();
                 }
@@ -81,5 +81,33 @@ namespace MapacheBigoton.Repository
                 }
             } // La conexión se cierra automáticamente aquí
         }
+
+        public Barber ObtenerBarbero(int idBarbero, int idSucursal)
+        {
+            Barber barber = new Barber();
+            using (SqlConnection connection = _databaseConnection.GetConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand("BuscarBarbero", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@idBarbero", SqlDbType.Int).Value = idBarbero;
+                    cmd.Parameters.Add("@idSucursal", SqlDbType.Int).Value = idSucursal;
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            barber.IdBarbero = reader.GetInt32(0);
+                            barber.IdSucursal = reader.GetInt32(1);
+                            barber.NombreBarbero = reader.GetString(2);
+
+                        }
+                    }
+                }
+
+            }
+            return barber;
+        }
     }
 }

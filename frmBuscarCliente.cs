@@ -27,7 +27,7 @@ namespace MapacheBigoton
 
         private void bBuscar_Click(object sender, EventArgs e)
         {
-            cliente = _clienteRepository.ObtenerCliente(tbTel.Text);
+            cliente = _clienteRepository.ObtenerCliente(tbTel.Text, frmAg.sucursal.IdSucursal);
             if (cliente.NombreCliente != null)
             {
                 txtNom.Text = cliente.NombreCliente;

@@ -49,6 +49,7 @@
             panelCalendario = new Panel();
             label3 = new Label();
             pictureBox1 = new PictureBox();
+            btnActualizar = new Button();
             panel1.SuspendLayout();
             panelTop.SuspendLayout();
             panelIzquierda.SuspendLayout();
@@ -74,6 +75,7 @@
             // 
             panel1.BackColor = Color.White;
             panel1.BorderStyle = BorderStyle.Fixed3D;
+            panel1.Controls.Add(btnActualizar);
             panel1.Controls.Add(btnAgendarCita);
             panel1.Controls.Add(dateTimePicker1);
             panel1.Controls.Add(label2);
@@ -279,6 +281,16 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
+            // btnActualizar
+            // 
+            btnActualizar.Location = new Point(381, 39);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.Size = new Size(75, 23);
+            btnActualizar.TabIndex = 4;
+            btnActualizar.Text = "Actualizar";
+            btnActualizar.UseVisualStyleBackColor = true;
+            btnActualizar.Click += btnActualizar_Click;
+            // 
             // FrmCitas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -334,5 +346,6 @@
         private PictureBox pictureBox1;
         private Button btnAgendarCita;
         private DateTimePicker dateTimePicker1;
+        private Button btnActualizar;
     }
 }

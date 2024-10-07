@@ -16,16 +16,18 @@ namespace MapacheBigoton
     public partial class FrmClientes : Form
     {
         private readonly ClientesRepository repository;
-        public FrmClientes()
+        Sucursal sucursal;
+        public FrmClientes(Sucursal sucursal)
         {
             InitializeComponent();
             repository = new ClientesRepository(new DatabaseConnection());
+            this.sucursal = sucursal;
             CargarClientes();
         }
 
         private void CargarClientes()
         {
-            List<Client> clientes = repository.ObtenerClientes();
+            List<Client> clientes = repository.ObtenerClientes(sucursal.IdSucursal);
             dataGridView1.DataSource = clientes;
         }
 
@@ -33,6 +35,7 @@ namespace MapacheBigoton
         {
             Client c = new Client
             {
+                IdSucursal = sucursal.IdSucursal,
                 NombreCliente = txtCliente.Text,
                 TelefonoCliente = txtTelefono.Text
             };

@@ -19,13 +19,13 @@ namespace MapacheBigoton.Repository
         }
 
         // Obtener todos los servicios
-        public List<Service> ObtenerServicios()
+        public List<Service> ObtenerServicios(int idSucursal)
         {
             List<Service> servicios = new List<Service>();
 
             using (SqlConnection connection = _databaseConnection.GetConnection())
             {
-                string query = "SELECT IdServicio, NombreServicio, DescripcionServicio, CostoServicio FROM TBServicio";
+                string query = "SELECT idServicio, idSucursal, NombreServicio, DescripcionServicio, CostoServicio FROM TBServicio WHERE idSucursal = " + idSucursal;
 
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
@@ -35,9 +35,10 @@ namespace MapacheBigoton.Repository
                     Service servicio = new Service
                     {
                         IdServicio = reader.GetInt32(0),
-                        NombreServicio = reader.GetString(1),
-                        DescripcionServicio = reader.GetString(2),
-                        CostoServicio = reader.GetDecimal(3)
+                        IdSucursal = reader.GetInt32(1),
+                        NombreServicio = reader.GetString(2),
+                        DescripcionServicio = reader.GetString(3),
+                        CostoServicio = reader.GetDecimal(4)
                     };
 
                     servicios.Add(servicio);
@@ -48,13 +49,13 @@ namespace MapacheBigoton.Repository
         }
 
         // Obtener un servicio por Id
-        public Service ObtenerServicioPorId(int idServicio)
+        public Service ObtenerServicioPorId(int idServicio, int idSucursal)
         {
             Service servicio = null;
 
             using (SqlConnection connection = _databaseConnection.GetConnection())
             {
-                string query = "SELECT IdServicio, NombreServicio, DescripcionServicio, CostoServicio FROM TBServicio WHERE IdServicio = @IdServicio";
+                string query = "SELECT idServicio, idSucursal, NombreServicio, DescripcionServicio, CostoServicio FROM TBServicio WHERE idServicio = @IdServicio AND idSucursal = " + idSucursal;
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@IdServicio", idServicio);
@@ -65,9 +66,10 @@ namespace MapacheBigoton.Repository
                     servicio = new Service
                     {
                         IdServicio = reader.GetInt32(0),
-                        NombreServicio = reader.GetString(1),
-                        DescripcionServicio = reader.GetString(2),
-                        CostoServicio = reader.GetDecimal(3)
+                        IdSucursal = reader.GetInt32(1),
+                        NombreServicio = reader.GetString(2),
+                        DescripcionServicio = reader.GetString(3),
+                        CostoServicio = reader.GetDecimal(4)
                     };
                 }
             }
@@ -80,10 +82,11 @@ namespace MapacheBigoton.Repository
         {
             using (SqlConnection connection = _databaseConnection.GetConnection())
             {
-                string query = "INSERT INTO TBServicio (NombreServicio, DescripcionServicio, CostoServicio) " +
-                               "VALUES (@NombreServicio, @DescripcionServicio, @CostoServicio)";
+                string query = "INSERT INTO TBServicio (idSucursal, NombreServicio, DescripcionServicio, CostoServicio) " +
+                               "VALUES (@idSucursal, @NombreServicio, @DescripcionServicio, @CostoServicio)";
 
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@idSucursal", servicio.IdSucursal);
                 command.Parameters.AddWithValue("@NombreServicio", servicio.NombreServicio);
                 command.Parameters.AddWithValue("@DescripcionServicio", servicio.DescripcionServicio);
                 command.Parameters.AddWithValue("@CostoServicio", servicio.CostoServicio);
@@ -98,10 +101,10 @@ namespace MapacheBigoton.Repository
             using (SqlConnection connection = _databaseConnection.GetConnection())
             {
                 string query = "UPDATE TBServicio SET NombreServicio = @NombreServicio, DescripcionServicio = @DescripcionServicio, CostoServicio = @CostoServicio " +
-                               "WHERE IdServicio = @IdServicio";
+                               "WHERE idServicio = @idServicio";
 
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@IdServicio", servicio.IdServicio);
+                command.Parameters.AddWithValue("@idServicio", servicio.IdServicio);
                 command.Parameters.AddWithValue("@NombreServicio", servicio.NombreServicio);
                 command.Parameters.AddWithValue("@DescripcionServicio", servicio.DescripcionServicio);
                 command.Parameters.AddWithValue("@CostoServicio", servicio.CostoServicio);
@@ -111,11 +114,11 @@ namespace MapacheBigoton.Repository
         }
 
         // Eliminar un servicio por Id
-        public void EliminarServicio(int idServicio)
+        public void EliminarServicio(int idServicio, int idSucursal)
         {
             using (SqlConnection connection = _databaseConnection.GetConnection())
             {
-                string query = "DELETE FROM TBServicio WHERE IdServicio = @IdServicio";
+                string query = "DELETE FROM TBServicio WHERE idServicio = @IdServicio AND idSucursal = " + idSucursal;
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@IdServicio", idServicio);

@@ -17,6 +17,7 @@ namespace MapacheBigoton
     public partial class FrmSucursal : Form
     {
         private readonly SucursalRepository _sucursalRepository;
+        private Control SucursalControl;
         public FrmSucursal()
         {
             InitializeComponent();
@@ -31,9 +32,18 @@ namespace MapacheBigoton
             foreach (var item in sucursales)
             {
                 SucursalControl ctrlSuc = new SucursalControl(item);
+                ctrlSuc.btnSeleccionarSuc += btnSelectSucClick;
                 flpSucursales.Controls.Add(ctrlSuc);
             }
 
+        }
+
+        private void btnSelectSucClick(object? sender, EventArgs e)
+        {
+            SucursalControl sc = sender as SucursalControl;
+            FrmServicios frmServ = new FrmServicios(sc.sucursal);
+            frmServ.ShowDialog();
+            this.Hide();
         }
 
         private void label1_Click(object sender, EventArgs e)

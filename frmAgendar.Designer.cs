@@ -155,7 +155,7 @@
             panelServicios.Controls.Add(numMinu);
             panelServicios.Location = new Point(253, 167);
             panelServicios.Name = "panelServicios";
-            panelServicios.Size = new Size(1000, 630);
+            panelServicios.Size = new Size(548, 392);
             panelServicios.TabIndex = 17;
             // 
             // bBuscarClient
@@ -226,7 +226,7 @@
             panel1.Controls.Add(label1);
             panel1.Location = new Point(239, 60);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1034, 100);
+            panel1.Size = new Size(562, 100);
             panel1.TabIndex = 16;
             // 
             // label2
@@ -257,7 +257,7 @@
             panelTop.Controls.Add(panelIzquierda);
             panelTop.Location = new Point(9, 10);
             panelTop.Name = "panelTop";
-            panelTop.Size = new Size(1264, 50);
+            panelTop.Size = new Size(792, 50);
             panelTop.TabIndex = 15;
             // 
             // panelIzquierda
@@ -291,7 +291,7 @@
             panelMenu.Controls.Add(pictureBox1);
             panelMenu.Location = new Point(9, 60);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(230, 740);
+            panelMenu.Size = new Size(230, 499);
             panelMenu.TabIndex = 14;
             // 
             // panel5
@@ -409,7 +409,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1199, 562);
+            ClientSize = new Size(807, 569);
             Controls.Add(panelServicios);
             Controls.Add(panel1);
             Controls.Add(panelTop);

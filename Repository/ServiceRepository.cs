@@ -17,13 +17,13 @@ namespace MapacheBigoton.Repository
             _databaseConnection = databaseConnection;
         }
 
-        public List<Service> ObtenerServicios()
+        public List<Service> ObtenerServicios(int idSucursal)
         {
             List<Service> servicios = new List<Service>();
 
             using (SqlConnection connection = _databaseConnection.GetConnection())
             {
-                string query = "select * from TBServicio;";
+                string query = "select * from TBServicio WHERE idSucursal = " + idSucursal;
 
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
@@ -33,9 +33,10 @@ namespace MapacheBigoton.Repository
                     Service servicio = new Service
                     {
                         IdServicio = reader.GetInt32(0),
-                        NombreServicio = reader.GetString(1),
-                        DescripcionServicio = reader.GetString(2),
-                        CostoServicio = reader.GetDecimal(3)
+                        IdSucursal = reader.GetInt32(1),
+                        NombreServicio = reader.GetString(2),
+                        DescripcionServicio = reader.GetString(3),
+                        CostoServicio = reader.GetDecimal(4)
                     };
                     servicios.Add(servicio);
                 }

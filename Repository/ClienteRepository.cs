@@ -19,13 +19,13 @@ namespace MapacheBigoton.Repository
             _databaseConnection = databaseConnection;
         }
 
-        public List<Client> ObtenerClientes()
+        public List<Client> ObtenerClientes(int idSucursal)
         {
             List<Client> clientes = new List<Client>();
 
             using (SqlConnection connection = _databaseConnection.GetConnection())
             {
-                string query = "SELECT * FROM TBCliente;";
+                string query = "SELECT * FROM TBCliente WHERE idSucursal = " + idSucursal;
 
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
@@ -35,8 +35,9 @@ namespace MapacheBigoton.Repository
                     Client cliente = new Client
                     {
                         IdCliente = reader.GetInt32(0),
-                        NombreCliente = reader.GetString(1),
-                        TelefonoCliente = reader.GetString(2)
+                        IdSucursal = reader.GetInt32(1),
+                        NombreCliente = reader.GetString(2),
+                        TelefonoCliente = reader.GetString(3)
                     };
 
                     clientes.Add(cliente);
@@ -46,7 +47,7 @@ namespace MapacheBigoton.Repository
             return clientes;
         }
 
-        public Client ObtenerCliente(string TelefonoCliente)
+        public Client ObtenerCliente(string TelefonoCliente, int idSucursal)
         {
             Client client = new Client();
             using (SqlConnection connection = _databaseConnection.GetConnection())
@@ -55,6 +56,7 @@ namespace MapacheBigoton.Repository
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@TelefonoCliente", SqlDbType.VarChar, 10).Value = TelefonoCliente;
+                    cmd.Parameters.Add("@idSucursal", SqlDbType.Int).Value = idSucursal;
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     if (reader.HasRows)
@@ -62,8 +64,38 @@ namespace MapacheBigoton.Repository
                         while (reader.Read())
                         {
                             client.IdCliente = reader.GetInt32(0);
-                            client.NombreCliente = reader.GetString(1);
-                            client.TelefonoCliente = reader.GetString(2);
+                            client.IdSucursal = reader.GetInt32(1);
+                            client.NombreCliente = reader.GetString(2);
+                            client.TelefonoCliente = reader.GetString(3);
+
+                        }
+                    }
+                }
+
+            }
+            return client;
+        }
+
+        public Client ObtenerClienteSuc(int idCliente, int idSucursal)
+        {
+            Client client = new Client();
+            using (SqlConnection connection = _databaseConnection.GetConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand("BuscarClienteSucursal", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@idCliente", SqlDbType.Int).Value = idCliente;
+                    cmd.Parameters.Add("@idSucursal", SqlDbType.Int).Value = idSucursal;
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            client.IdCliente = reader.GetInt32(0);
+                            client.IdSucursal = reader.GetInt32(1);
+                            client.NombreCliente = reader.GetString(2);
+                            client.TelefonoCliente = reader.GetString(3);
 
                         }
                     }

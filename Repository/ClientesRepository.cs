@@ -19,7 +19,7 @@ namespace MapacheBigoton.Repository
             _databaseConnection = databaseConnection;
         }
 
-        public List<Client> ObtenerClientes()
+        public List<Client> ObtenerClientes(int idSucursal)
         {
             List<Client> clientes = new List<Client>();
 
@@ -29,7 +29,7 @@ namespace MapacheBigoton.Repository
                 {
                     connection.Open();
                 }
-                string query = "SELECT IdCliente, NombreCliente, TelefonoCliente FROM TBCliente";
+                string query = "SELECT idCliente, idSucursal, NombreCliente, TelefonoCliente FROM TBCliente WHERE idSucursal = " + idSucursal;
 
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
@@ -39,8 +39,9 @@ namespace MapacheBigoton.Repository
                     Client cliente = new Client
                     {
                         IdCliente = reader.GetInt32(0),
-                        NombreCliente = reader.GetString(1),
-                        TelefonoCliente = reader.GetString(2)
+                        IdSucursal = reader.GetInt32(1),
+                        NombreCliente = reader.GetString(2),
+                        TelefonoCliente = reader.GetString(3)
                     };
 
                     clientes.Add(cliente);
@@ -61,8 +62,9 @@ namespace MapacheBigoton.Repository
                     {
                         connection.Open();
                     }
-                    string query = "INSERT INTO TBCliente (NombreCliente, TelefonoCliente) VALUES (@NombreCliente, @TelefonoCliente)";
+                    string query = "INSERT INTO TBCliente (idSucursal, NombreCliente, TelefonoCliente) VALUES (@idSucursal, @NombreCliente, @TelefonoCliente)";
                     SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@idSucursal", cliente.IdSucursal);
                     command.Parameters.AddWithValue("@NombreCliente", cliente.NombreCliente);
                     command.Parameters.AddWithValue("@TelefonoCliente", cliente.TelefonoCliente);
                     command.ExecuteNonQuery();

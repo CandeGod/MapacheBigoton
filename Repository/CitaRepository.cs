@@ -20,17 +20,13 @@ namespace MapacheBigoton.Repository
             _databaseConnection = databaseConnection;
         }
 
-        public List<Cita> ObtenerCitas()
+        public List<Cita> ObtenerCitas(int idSucursal)
         {
             List<Cita> citas = new List<Cita>();
 
             using (SqlConnection connection = _databaseConnection.GetConnection())
             {
-                string query = "SELECT C.Fecha, CL.NombreCliente, B.NombreBarbero, S.NombreServicio " +
-                               "FROM TBCita C " +
-                               "JOIN TBCliente CL ON C.IdCliente = CL.IdCliente " +
-                               "JOIN TBBarbero B ON C.IdBarbero = B.IdBarbero " +
-                               "JOIN TBServicio S ON C.IdServicio = S.IdServicio";
+                string query = "SELECT * FROM TBCita WHERE idSucursal = " + idSucursal;
 
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
@@ -39,11 +35,14 @@ namespace MapacheBigoton.Repository
                 {
                     Cita cita = new Cita
                     {
+                        IdCita = reader.GetInt32(0),
+                        idClient = reader.GetInt32(1) ,
+                        idBarber = reader.GetInt32(2) ,
+                        idService = reader.GetInt32(3) , 
+                        IdSucursal = reader.GetInt32(4),
+                        Hora = reader.GetTimeSpan(5),
+                        Fecha = reader.GetDateTime(6),
 
-                        Fecha = reader.GetDateTime(0),
-                        Client = new Client { NombreCliente = reader.GetString(1) },
-                        Barber = new Barber { NombreBarbero = reader.GetString(2) },
-                        Service = new Service { NombreServicio = reader.GetString(3) }
                     };
 
                     citas.Add(cita);
@@ -52,7 +51,7 @@ namespace MapacheBigoton.Repository
 
             return citas;
         }
-        public void AgregarCita(TimeSpan Hora, DateTime Fecha, int idCliente, int idBarbero, int idServicio)
+        public void AgregarCita(TimeSpan Hora, DateTime Fecha, int idCliente, int idBarbero, int idServicio, int idSucursal)
         {
             using (SqlConnection connection = _databaseConnection.GetConnection())
             {
@@ -64,6 +63,7 @@ namespace MapacheBigoton.Repository
                     cmd.Parameters.Add("@IdCliente", SqlDbType.Int).Value = idCliente;
                     cmd.Parameters.Add("@IdBarbero", SqlDbType.Int).Value = idBarbero;
                     cmd.Parameters.Add("@IdServicio", SqlDbType.Int).Value = idServicio;
+                    cmd.Parameters.Add("@idSucursal", SqlDbType.Int).Value = idSucursal;
                     cmd.ExecuteNonQuery();
                 }
                 

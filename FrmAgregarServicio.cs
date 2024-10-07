@@ -17,12 +17,15 @@ namespace MapacheBigoton
     {
         private readonly ServicioRepository _servicioRepository;
         private readonly FrmServicios _frmServicios;  // Referencia a FrmServicios
+        Sucursal sucursal;
 
-        public FrmAgregarServicio(FrmServicios frmServicios)
+        public FrmAgregarServicio(FrmServicios frmServicios, Sucursal sucursal)
         {
             InitializeComponent();
+            this.sucursal = sucursal;
             _servicioRepository = new ServicioRepository(new DatabaseConnection());
             _frmServicios = frmServicios;  // Asigna la referencia pasada
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -46,6 +49,7 @@ namespace MapacheBigoton
             // Crear un nuevo objeto Service
             Service nuevoServicio = new Service
             {
+                IdSucursal = sucursal.IdSucursal,   
                 NombreServicio = txtNombreServicio.Text.Trim(),
                 DescripcionServicio = richDescripcionServicio.Text.Trim(),
                 CostoServicio = costoServicio

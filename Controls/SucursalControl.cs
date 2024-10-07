@@ -13,11 +13,12 @@ namespace MapacheBigoton.Controls
 {
     public partial class SucursalControl : UserControl
     {
-        Sucursal sucursal;
+        public Sucursal sucursal;
+        public EventHandler btnSeleccionarSuc;
         public SucursalControl(Sucursal sucursal)
         {
-            this.sucursal = sucursal;
             InitializeComponent();
+            this.sucursal = sucursal;
             LlenarSuc();
         }
 
@@ -32,7 +33,10 @@ namespace MapacheBigoton.Controls
 
         private void bSeleccionarSuc_Click(object sender, EventArgs e)
         {
-
+            if (btnSeleccionarSuc != null)
+            {
+                btnSeleccionarSuc(this, e);
+            }
         }
     }
 }

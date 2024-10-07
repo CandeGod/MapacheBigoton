@@ -29,19 +29,21 @@ namespace MapacheBigoton
             Color.FromArgb(0xFF, 0x69, 0xB4), // #FF69B4
             Color.FromArgb(0x98, 0xFF, 0x98)  // #98FF98
         };
+        Sucursal sucursal;
 
         private int colorIndex = 0; // Índice para rastrear el color actual
 
-        public FrmServicios()
+        public FrmServicios(Sucursal sucursal)
         {
             InitializeComponent();
             _servicioRepository = new ServicioRepository(new DatabaseConnection());
+            this.sucursal = sucursal;
             CargarServicios();
         }
 
         public void CargarServicios()
         {
-            List<Service> services = _servicioRepository.ObtenerServicios();
+            List<Service> services = _servicioRepository.ObtenerServicios(sucursal.IdSucursal);
             flpServicios.Controls.Clear();
 
             foreach (Service service in services)
@@ -64,24 +66,24 @@ namespace MapacheBigoton
         private void panelCalendario_MouseClick(object sender, MouseEventArgs e)
         {
             // Crear una instancia del formulario FrmCitas
-            FrmCitas frmCitas = new FrmCitas();
-            this.Hide();
+            FrmCitas frmCitas = new FrmCitas(sucursal);
             frmCitas.Show();
+            //this.Close();
 
         }
 
         private void btnAgregarServicio_Click(object sender, EventArgs e)
         {
-            FrmAgregarServicio frmAgregarServicio = new FrmAgregarServicio(this); // Pasa "this" como referencia
+            FrmAgregarServicio frmAgregarServicio = new FrmAgregarServicio(this, sucursal);
             frmAgregarServicio.ShowDialog();
         }
 
 
         private void label3_MouseClick(object sender, MouseEventArgs e)
         {
-            FrmCitas frmCitas = new FrmCitas();
-            this.Hide();
+            FrmCitas frmCitas = new FrmCitas(sucursal);
             frmCitas.Show();
+            //this.Close();
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -96,9 +98,9 @@ namespace MapacheBigoton
 
         private void lClientes_Click(object sender, EventArgs e)
         {
-            frmAgendar frmAgendar = new frmAgendar();
-            this.Hide();
+            frmAgendar frmAgendar = new frmAgendar(sucursal);
             frmAgendar.Show();
+            //this.Close();
 
         }
     }

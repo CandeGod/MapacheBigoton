@@ -23,9 +23,12 @@ namespace MapacheBigoton
         List<Client> clientes;
         List<Barber> barberos;
         List<Service> servicios;
-        public frmAgendar()
+        public Sucursal sucursal;
+
+        public frmAgendar(Sucursal sucursal)
         {
             InitializeComponent();
+            this.sucursal = sucursal;
             _clienteRepository = new ClienteRepository(new DatabaseConnection());
             _barberoRepository = new BarberoRepository(new DatabaseConnection());
             _serviceRepository = new ServiceRepository(new DatabaseConnection());
@@ -38,7 +41,7 @@ namespace MapacheBigoton
         public void CargarClientes()
         {
             cbClientes.Items.Clear();
-            clientes = _clienteRepository.ObtenerClientes();
+            clientes = _clienteRepository.ObtenerClientes(sucursal.IdSucursal);
             string ncliente = "";
             foreach (Client cliente in clientes)
             {
@@ -50,7 +53,7 @@ namespace MapacheBigoton
         public void CargarBarberos()
         {
             cbBarberos.Items.Clear();
-            barberos = _barberoRepository.ObtenerBarberos();
+            barberos = _barberoRepository.ObtenerBarberos(sucursal.IdSucursal);
             foreach (Barber barbero in barberos)
             {
                 cbBarberos.Items.Add(barbero.NombreBarbero);
@@ -60,7 +63,7 @@ namespace MapacheBigoton
         public void CargarServicios()
         {
             cbServicios.Items.Clear();
-            servicios = _serviceRepository.ObtenerServicios();
+            servicios = _serviceRepository.ObtenerServicios(sucursal.IdSucursal);
             foreach (Service servicio in servicios)
             {
                 cbServicios.Items.Add(servicio.NombreServicio);
@@ -88,7 +91,7 @@ namespace MapacheBigoton
             clienteAux = clientes.ElementAt(cbClientes.SelectedIndex);
             Barber barbero = barberos.ElementAt(cbBarberos.SelectedIndex);
             Service servicio = servicios.ElementAt(cbServicios.SelectedIndex);
-            _citaRepository.AgregarCita(horas, fecha, clienteAux.IdCliente, barbero.IdBarbero, servicio.IdServicio);
+            _citaRepository.AgregarCita(horas, fecha, clienteAux.IdCliente, barbero.IdBarbero, servicio.IdServicio, sucursal.IdSucursal);
             MessageBox.Show("Cita realizada");
         }
 
