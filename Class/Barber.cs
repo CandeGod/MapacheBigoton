@@ -9,6 +9,7 @@ namespace MapacheBigoton.Class
     public class Barber
     {
         public int IdBarbero {  get; set; }
+        public int IdSucursal { get; set; }
         public string NombreBarbero { get; set; }
 
     }

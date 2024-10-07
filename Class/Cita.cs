@@ -9,6 +9,7 @@ namespace MapacheBigoton.Class
     public class Cita
     {
         public int IdCita { get; set; }
+        public int IdSucursal { get; set; }
         public TimeSpan Hora { get; set; }
         public DateTime Fecha { get; set; }
         public Client Client { get; set; }

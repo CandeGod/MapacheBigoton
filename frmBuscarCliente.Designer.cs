@@ -43,7 +43,7 @@
             // 
             pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox1.Image = Properties.Resources.mapacheBigoton;
+            //pictureBox1.Image = Properties.Resources.mapacheBigoton;
             pictureBox1.ImageLocation = "";
             pictureBox1.Location = new Point(82, 12);
             pictureBox1.Name = "pictureBox1";

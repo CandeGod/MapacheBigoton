@@ -1,6 +1,6 @@
 ﻿namespace MapacheBigoton
 {
-    partial class frmAgendar
+    partial class FrmSucursal
     {
         /// <summary>
         /// Required designer variable.
@@ -28,21 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            cbBarberos = new ComboBox();
-            cbServicios = new ComboBox();
-            dtFecha = new DateTimePicker();
-            bAgendar = new Button();
-            numHora = new NumericUpDown();
-            numMinu = new NumericUpDown();
-            cbClientes = new ComboBox();
-            panelServicios = new Panel();
-            bBuscarClient = new Button();
-            label12 = new Label();
-            label11 = new Label();
-            label10 = new Label();
-            label9 = new Label();
-            label8 = new Label();
             panel1 = new Panel();
+            btnAgendarCita = new Button();
             label2 = new Label();
             label1 = new Label();
             panelTop = new Panel();
@@ -60,9 +47,7 @@
             panelCalendario = new Panel();
             label3 = new Label();
             pictureBox1 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)numHora).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numMinu).BeginInit();
-            panelServicios.SuspendLayout();
+            flpSucursales = new FlowLayoutPanel();
             panel1.SuspendLayout();
             panelTop.SuspendLayout();
             panelIzquierda.SuspendLayout();
@@ -75,159 +60,29 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // cbBarberos
-            // 
-            cbBarberos.FormattingEnabled = true;
-            cbBarberos.Location = new Point(129, 182);
-            cbBarberos.Name = "cbBarberos";
-            cbBarberos.Size = new Size(234, 23);
-            cbBarberos.TabIndex = 1;
-            // 
-            // cbServicios
-            // 
-            cbServicios.FormattingEnabled = true;
-            cbServicios.Location = new Point(129, 240);
-            cbServicios.Name = "cbServicios";
-            cbServicios.Size = new Size(234, 23);
-            cbServicios.TabIndex = 2;
-            // 
-            // dtFecha
-            // 
-            dtFecha.Location = new Point(129, 76);
-            dtFecha.MinDate = new DateTime(2023, 1, 1, 0, 0, 0, 0);
-            dtFecha.Name = "dtFecha";
-            dtFecha.Size = new Size(234, 23);
-            dtFecha.TabIndex = 5;
-            dtFecha.Value = new DateTime(2024, 9, 16, 0, 0, 0, 0);
-            // 
-            // bAgendar
-            // 
-            bAgendar.Location = new Point(171, 278);
-            bAgendar.Name = "bAgendar";
-            bAgendar.Size = new Size(75, 23);
-            bAgendar.TabIndex = 6;
-            bAgendar.Text = "Agendar";
-            bAgendar.UseVisualStyleBackColor = true;
-            bAgendar.Click += bAgendar_Click;
-            // 
-            // numHora
-            // 
-            numHora.Location = new Point(129, 22);
-            numHora.Maximum = new decimal(new int[] { 17, 0, 0, 0 });
-            numHora.Minimum = new decimal(new int[] { 9, 0, 0, 0 });
-            numHora.Name = "numHora";
-            numHora.Size = new Size(36, 23);
-            numHora.TabIndex = 7;
-            numHora.Value = new decimal(new int[] { 9, 0, 0, 0 });
-            // 
-            // numMinu
-            // 
-            numMinu.Increment = new decimal(new int[] { 15, 0, 0, 0 });
-            numMinu.Location = new Point(171, 22);
-            numMinu.Maximum = new decimal(new int[] { 45, 0, 0, 0 });
-            numMinu.Name = "numMinu";
-            numMinu.Size = new Size(36, 23);
-            numMinu.TabIndex = 8;
-            // 
-            // cbClientes
-            // 
-            cbClientes.FormattingEnabled = true;
-            cbClientes.Location = new Point(129, 129);
-            cbClientes.Name = "cbClientes";
-            cbClientes.Size = new Size(234, 23);
-            cbClientes.TabIndex = 9;
-            // 
-            // panelServicios
-            // 
-            panelServicios.BackColor = Color.White;
-            panelServicios.Controls.Add(bBuscarClient);
-            panelServicios.Controls.Add(label12);
-            panelServicios.Controls.Add(label11);
-            panelServicios.Controls.Add(label10);
-            panelServicios.Controls.Add(label9);
-            panelServicios.Controls.Add(label8);
-            panelServicios.Controls.Add(bAgendar);
-            panelServicios.Controls.Add(cbBarberos);
-            panelServicios.Controls.Add(cbServicios);
-            panelServicios.Controls.Add(dtFecha);
-            panelServicios.Controls.Add(cbClientes);
-            panelServicios.Controls.Add(numHora);
-            panelServicios.Controls.Add(numMinu);
-            panelServicios.Location = new Point(253, 167);
-            panelServicios.Name = "panelServicios";
-            panelServicios.Size = new Size(1000, 630);
-            panelServicios.TabIndex = 17;
-            // 
-            // bBuscarClient
-            // 
-            bBuscarClient.Location = new Point(379, 129);
-            bBuscarClient.Name = "bBuscarClient";
-            bBuscarClient.Size = new Size(92, 23);
-            bBuscarClient.TabIndex = 15;
-            bBuscarClient.Text = "Buscar Cliente";
-            bBuscarClient.UseVisualStyleBackColor = true;
-            bBuscarClient.Click += bBuscarClient_Click;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Cooper Black", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label12.Location = new Point(15, 242);
-            label12.Name = "label12";
-            label12.Size = new Size(95, 21);
-            label12.TabIndex = 14;
-            label12.Text = "Servicio:";
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Cooper Black", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label11.Location = new Point(15, 182);
-            label11.Name = "label11";
-            label11.Size = new Size(94, 21);
-            label11.TabIndex = 13;
-            label11.Text = "Barbero:";
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Cooper Black", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label10.Location = new Point(15, 127);
-            label10.Name = "label10";
-            label10.Size = new Size(86, 21);
-            label10.TabIndex = 12;
-            label10.Text = "Cliente:";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Cooper Black", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.Location = new Point(15, 82);
-            label9.Name = "label9";
-            label9.Size = new Size(73, 21);
-            label9.TabIndex = 11;
-            label9.Text = "Fecha:";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Cooper Black", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(15, 28);
-            label8.Name = "label8";
-            label8.Size = new Size(63, 21);
-            label8.TabIndex = 10;
-            label8.Text = "Hora:";
-            // 
             // panel1
             // 
             panel1.BackColor = Color.White;
             panel1.BorderStyle = BorderStyle.Fixed3D;
+            panel1.Controls.Add(btnAgendarCita);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(239, 60);
+            panel1.Location = new Point(248, 68);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1034, 100);
-            panel1.TabIndex = 16;
+            panel1.Size = new Size(1014, 100);
+            panel1.TabIndex = 23;
+            // 
+            // btnAgendarCita
+            // 
+            btnAgendarCita.BackColor = Color.Black;
+            btnAgendarCita.ForeColor = SystemColors.ButtonFace;
+            btnAgendarCita.Location = new Point(843, 23);
+            btnAgendarCita.Margin = new Padding(3, 2, 3, 2);
+            btnAgendarCita.Name = "btnAgendarCita";
+            btnAgendarCita.Size = new Size(149, 48);
+            btnAgendarCita.TabIndex = 3;
+            btnAgendarCita.Text = "Agendar cita";
+            btnAgendarCita.UseVisualStyleBackColor = false;
             // 
             // label2
             // 
@@ -236,9 +91,9 @@
             label2.ForeColor = Color.FromArgb(23, 162, 184);
             label2.Location = new Point(31, 65);
             label2.Name = "label2";
-            label2.Size = new Size(359, 18);
+            label2.Size = new Size(211, 18);
             label2.TabIndex = 1;
-            label2.Text = "Tus servicios de barbería para el público";
+            label2.Text = "Sucursales Registradas";
             // 
             // label1
             // 
@@ -247,18 +102,19 @@
             label1.ForeColor = Color.FromArgb(220, 53, 69);
             label1.Location = new Point(25, 17);
             label1.Name = "label1";
-            label1.Size = new Size(430, 42);
+            label1.Size = new Size(231, 42);
             label1.TabIndex = 0;
-            label1.Text = "Servicios de barberia";
+            label1.Text = "Sucursales";
+            label1.Click += label1_Click;
             // 
             // panelTop
             // 
             panelTop.BackColor = Color.FromArgb(252, 204, 124);
             panelTop.Controls.Add(panelIzquierda);
-            panelTop.Location = new Point(9, 10);
+            panelTop.Location = new Point(12, 12);
             panelTop.Name = "panelTop";
-            panelTop.Size = new Size(1264, 50);
-            panelTop.TabIndex = 15;
+            panelTop.Size = new Size(1245, 50);
+            panelTop.TabIndex = 22;
             // 
             // panelIzquierda
             // 
@@ -289,15 +145,15 @@
             panelMenu.Controls.Add(panel2);
             panelMenu.Controls.Add(panelCalendario);
             panelMenu.Controls.Add(pictureBox1);
-            panelMenu.Location = new Point(9, 60);
+            panelMenu.Location = new Point(12, 68);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(230, 740);
-            panelMenu.TabIndex = 14;
+            panelMenu.Size = new Size(230, 585);
+            panelMenu.TabIndex = 21;
             // 
             // panel5
             // 
             panel5.Controls.Add(label7);
-            panel5.Location = new Point(0, 359);
+            panel5.Location = new Point(0, 318);
             panel5.Margin = new Padding(0);
             panel5.Name = "panel5";
             panel5.Size = new Size(230, 50);
@@ -317,7 +173,7 @@
             // panel4
             // 
             panel4.Controls.Add(label6);
-            panel4.Location = new Point(0, 309);
+            panel4.Location = new Point(0, 268);
             panel4.Margin = new Padding(0);
             panel4.Name = "panel4";
             panel4.Size = new Size(230, 50);
@@ -337,7 +193,7 @@
             // panel3
             // 
             panel3.Controls.Add(label5);
-            panel3.Location = new Point(0, 259);
+            panel3.Location = new Point(0, 218);
             panel3.Margin = new Padding(0);
             panel3.Name = "panel3";
             panel3.Size = new Size(230, 50);
@@ -357,7 +213,7 @@
             // panel2
             // 
             panel2.Controls.Add(label4);
-            panel2.Location = new Point(0, 209);
+            panel2.Location = new Point(0, 168);
             panel2.Margin = new Padding(0);
             panel2.Name = "panel2";
             panel2.Size = new Size(230, 50);
@@ -377,7 +233,7 @@
             // panelCalendario
             // 
             panelCalendario.Controls.Add(label3);
-            panelCalendario.Location = new Point(0, 159);
+            panelCalendario.Location = new Point(0, 118);
             panelCalendario.Margin = new Padding(0);
             panelCalendario.Name = "panelCalendario";
             panelCalendario.Size = new Size(230, 50);
@@ -397,7 +253,6 @@
             // pictureBox1
             // 
             pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox1.Image = Properties.Resources.mapacheBigoton;
             pictureBox1.Location = new Point(2, 0);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(225, 115);
@@ -405,22 +260,26 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // frmAgendar
+            // flpSucursales
+            // 
+            flpSucursales.AutoScroll = true;
+            flpSucursales.Location = new Point(251, 175);
+            flpSucursales.Margin = new Padding(3, 2, 3, 2);
+            flpSucursales.Name = "flpSucursales";
+            flpSucursales.Size = new Size(1011, 478);
+            flpSucursales.TabIndex = 20;
+            // 
+            // FrmSucursal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1199, 562);
-            Controls.Add(panelServicios);
+            ClientSize = new Size(1273, 659);
             Controls.Add(panel1);
             Controls.Add(panelTop);
             Controls.Add(panelMenu);
-            Name = "frmAgendar";
-            Text = "frmAgendar";
-            Load += frmAgendar_Load;
-            ((System.ComponentModel.ISupportInitialize)numHora).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numMinu).EndInit();
-            panelServicios.ResumeLayout(false);
-            panelServicios.PerformLayout();
+            Controls.Add(flpSucursales);
+            Name = "FrmSucursal";
+            Text = "FrmSucursal";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panelTop.ResumeLayout(false);
@@ -442,16 +301,9 @@
         }
 
         #endregion
-        private ComboBox cbBarberos;
-        private ComboBox cbServicios;
-        private DateTimePicker dtFecha;
-        private Button bAgendar;
-        private NumericUpDown numHora;
-        private NumericUpDown numMinu;
-        private ComboBox cbClientes;
-        private Panel panelServicios;
-        private Label label8;
+
         private Panel panel1;
+        private Button btnAgendarCita;
         private Label label2;
         private Label label1;
         private Panel panelTop;
@@ -469,10 +321,6 @@
         private Panel panelCalendario;
         private Label label3;
         private PictureBox pictureBox1;
-        private Label label12;
-        private Label label11;
-        private Label label10;
-        private Label label9;
-        private Button bBuscarClient;
+        private FlowLayoutPanel flpSucursales;
     }
 }

@@ -109,7 +109,7 @@
             // 
             // panel5
             // 
-            panel5.BackgroundImage = Properties.Resources.mapacheBigoton;
+            //panel5.BackgroundImage = Properties.Resources.mapacheBigoton;
             panel5.BackgroundImageLayout = ImageLayout.Zoom;
             panel5.Location = new Point(9, 64);
             panel5.Name = "panel5";

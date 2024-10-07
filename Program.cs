@@ -12,7 +12,7 @@ namespace MapacheBigoton
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            Application.Run(new FrmCitas());
+            Application.Run(new FrmSucursal());
 
         }
     }

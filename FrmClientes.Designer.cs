@@ -81,7 +81,7 @@
             // 
             // pictureBox4
             // 
-            pictureBox4.Image = Properties.Resources.mapacheBigoton;
+            //pictureBox4.Image = Properties.Resources.mapacheBigoton;
             pictureBox4.Location = new Point(1, 27);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(114, 47);
