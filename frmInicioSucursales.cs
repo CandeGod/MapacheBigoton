@@ -11,6 +11,9 @@ namespace MapacheBigoton
 {
     public partial class frmInicioSucursales : Form
     {
+
+
+
         private readonly SucursalRepository _sucursalRepository;
         private readonly List<Color> colores = new List<Color>
         {
@@ -33,32 +36,33 @@ namespace MapacheBigoton
             CargarSucursales();
         }
 
-        public void CargarSucursales()
+        private void CargarSucursales()
         {
-            // Obtener lista de sucursales desde el repositorio
             List<Sucursal> sucursales = _sucursalRepository.ObtenerSucursales();
             flpSucursales.Controls.Clear();
 
-            // Crear un control de usuario por cada sucursal
             foreach (Sucursal sucursal in sucursales)
             {
-                // Pasar el repositorio al UserControl para las operaciones de eliminar
                 UserControlSucursal userControlSucursal = new UserControlSucursal(_sucursalRepository);
                 userControlSucursal.CargarDatosSucursal(sucursal);
 
-                // Asignar el color en secuencia
+                // Asignar el color
                 Color assignedColor = colores[colorIndex];
                 userControlSucursal.AsignarColorOriginal(assignedColor);
-
-                // Incrementar el índice y reiniciarlo si llega al final de la lista
                 colorIndex = (colorIndex + 1) % colores.Count;
 
-                // Manejar eventos de edición y eliminación desde aquí si es necesario
-                userControlSucursal.Dock = DockStyle.Top;
+                // Suscribirse al evento SucursalClicked
+                userControlSucursal.SucursalClicked += (s, e) => AbrirFormularioCitas(sucursal);
 
-                // Agregar control de sucursal al panel de flujo
+                userControlSucursal.Dock = DockStyle.Top;
                 flpSucursales.Controls.Add(userControlSucursal);
             }
+        }
+
+        private void AbrirFormularioCitas(Sucursal sucursal)
+        {
+            FrmCitas citasForm = new FrmCitas(sucursal); // Asegúrate de que frmCitas acepte un Sucursal en su constructor
+            citasForm.ShowDialog(); // Muestra el formulario como cuadro de diálogo
         }
 
         // Método opcional para recargar las sucursales, por ejemplo, después de editar o eliminar

@@ -64,9 +64,9 @@ namespace MapacheBigoton
         private void panelCalendario_MouseClick(object sender, MouseEventArgs e)
         {
             // Crear una instancia del formulario FrmCitas
-            FrmCitas frmCitas = new FrmCitas();
-            this.Hide();
-            frmCitas.Show();
+            //FrmCitas frmCitas = new FrmCitas();
+            //this.Hide();
+            //frmCitas.Show();
 
         }
 
@@ -79,9 +79,9 @@ namespace MapacheBigoton
 
         private void label3_MouseClick(object sender, MouseEventArgs e)
         {
-            FrmCitas frmCitas = new FrmCitas();
-            this.Hide();
-            frmCitas.Show();
+            //FrmCitas frmCitas = new FrmCitas();
+            //this.Hide();
+            //frmCitas.Show();
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -96,9 +96,9 @@ namespace MapacheBigoton
 
         private void lClientes_Click(object sender, EventArgs e)
         {
-            frmAgendar frmAgendar = new frmAgendar();
-            this.Hide();
-            frmAgendar.Show();
+            //frmAgendar frmAgendar = new frmAgendar();
+            //this.Hide();
+            //frmAgendar.Show();
 
         }
     }
