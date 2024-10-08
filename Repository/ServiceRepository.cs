@@ -1,65 +1,70 @@
-﻿using MapacheBigoton.Class;
-using MapacheBigoton.Connection;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
+using MapacheBigoton.Class;
+using MapacheBigoton.Connection; // Asegúrate de que este namespace tenga la clase Service
 
 namespace MapacheBigoton.Repository
 {
     public class ServiceRepository
     {
-        private readonly DatabaseConnection _databaseConnection;
+        private readonly SqlConnection _connection;
 
+        // Constructor que recibe la conexión a la base de datos
         public ServiceRepository(DatabaseConnection databaseConnection)
         {
-            _databaseConnection = databaseConnection;
+            _connection = databaseConnection.GetConnection();
         }
 
-        // Método para obtener todos los servicios
-        public List<Service> ObtenerServicios()
+        // Método para obtener servicios por sucursal
+        public List<Service> ObtenerServicios(int idSucursal)
         {
-            List<Service> servicios = new List<Service>();
+            _connection.Close();
+            var servicios = new List<Service>();
+            string query = "SELECT * FROM TBServicio WHERE IdSucursal = @IdSucursal";
 
-            using (SqlConnection connection = _databaseConnection.GetConnection())
+            using (var command = new SqlCommand(query, _connection))
             {
-                try
+                command.Parameters.AddWithValue("@IdSucursal", idSucursal);
+                _connection.Open();
+                using (var reader = command.ExecuteReader())
                 {
-                    if (connection.State == ConnectionState.Closed)
-                    {
-                        connection.Open();
-                    }
-
-                    string query = "SELECT * FROM TBServicio;";
-                    SqlCommand command = new SqlCommand(query, connection);
-                    SqlDataReader reader = command.ExecuteReader();
-
                     while (reader.Read())
                     {
-                        Service servicio = new Service
+                        var servicio = new Service
                         {
-                            IdServicio = reader.GetInt32(0),
-                            NombreServicio = reader.GetString(1),
-                            DescripcionServicio = reader.GetString(2),
-                            CostoServicio = reader.GetDecimal(3)
+                            IdServicio = reader.GetInt32(reader.GetOrdinal("IdServicio")),
+                            NombreServicio = reader.GetString(reader.GetOrdinal("NombreServicio")),
+                            DescripcionServicio = reader.GetString(reader.GetOrdinal("DescripcionServicio")),
+                            CostoServicio = reader.GetDecimal(reader.GetOrdinal("CostoServicio")),
+                            IdSucursal = reader.GetInt32(reader.GetOrdinal("IdSucursal"))
                         };
                         servicios.Add(servicio);
                     }
                 }
-                catch (Exception ex)
-                {
-                    // Manejo de excepciones
-                    Console.WriteLine("Error al obtener servicios: " + ex.Message);
-                }
-                finally
-                {
-                    if (connection.State == ConnectionState.Open)
-                    {
-                        connection.Close();
-                    }
-                }
+                _connection.Close();
             }
             return servicios;
+        }
+
+        // Método para agregar un nuevo servicio
+        public void AgregarServicio(Service servicio)
+        {
+            string query = "INSERT INTO TBServicio (NombreServicio, DescripcionServicio, CostoServicio, IdSucursal) " +
+                           "VALUES (@NombreServicio, @DescripcionServicio, @CostoServicio, @IdSucursal)";
+
+            using (var command = new SqlCommand(query, _connection))
+            {
+                command.Parameters.AddWithValue("@NombreServicio", servicio.NombreServicio);
+                command.Parameters.AddWithValue("@DescripcionServicio", servicio.DescripcionServicio);
+                command.Parameters.AddWithValue("@CostoServicio", servicio.CostoServicio);
+                command.Parameters.AddWithValue("@IdSucursal", servicio.IdSucursal);
+
+                _connection.Open();
+                command.ExecuteNonQuery();
+                _connection.Close();
+            }
         }
     }
 }

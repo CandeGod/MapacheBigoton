@@ -50,7 +50,7 @@ namespace MapacheBigoton
         public void CargarBarberos()
         {
             cbBarberos.Items.Clear();
-            barberos = _barberoRepository.ObtenerBarberos();
+            barberos = _barberoRepository.ObtenerBarberos(_sucursalSeleccionada.IdSucursal);
             foreach (Barber barbero in barberos)
             {
                 cbBarberos.Items.Add(barbero.NombreBarbero);
@@ -60,12 +60,13 @@ namespace MapacheBigoton
         public void CargarServicios()
         {
             cbServicios.Items.Clear();
-            servicios = _serviceRepository.ObtenerServicios();
+            servicios = _serviceRepository.ObtenerServicios(_sucursalSeleccionada.IdSucursal);
             foreach (Service servicio in servicios)
             {
                 cbServicios.Items.Add(servicio.NombreServicio);
             }
         }
+
 
         public void CambiarCliente(Client client)
         {

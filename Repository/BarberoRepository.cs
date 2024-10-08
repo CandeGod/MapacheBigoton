@@ -1,90 +1,65 @@
-﻿using MapacheBigoton.Class;
-using MapacheBigoton.Connection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using MapacheBigoton.Class;
+using MapacheBigoton.Connection; // Asegúrate de que este namespace tenga la clase Barber
 
 namespace MapacheBigoton.Repository
 {
     public class BarberoRepository
     {
-        private readonly DatabaseConnection _databaseConnection;
+        private readonly SqlConnection _connection;
 
+        // Constructor que recibe la conexión a la base de datos
         public BarberoRepository(DatabaseConnection databaseConnection)
         {
-            _databaseConnection = databaseConnection;
+            _connection = databaseConnection.GetConnection();
         }
 
-        public List<Barber> ObtenerBarberos()
+        // Método para obtener barberos por sucursal
+        public List<Barber> ObtenerBarberos(int idSucursal)
         {
-            List<Barber> barbers = new List<Barber>();
+            _connection.Close();
+            var barberos = new List<Barber>();
+            string query = "SELECT * FROM TBBarbero WHERE IdSucursal = @IdSucursal";
 
-            using (SqlConnection connection = _databaseConnection.GetConnection())
+            using (var command = new SqlCommand(query, _connection))
             {
-                try
+                command.Parameters.AddWithValue("@IdSucursal", idSucursal);
+                _connection.Open();
+                using (var reader = command.ExecuteReader())
                 {
-                    if (connection.State == ConnectionState.Closed)
-                    {
-                        connection.Open();
-                    }
-
-                    // Query simplificado para obtener solo los barberos
-                    string query = "SELECT IdBarbero, NombreBarbero FROM TBBarbero";
-
-                    SqlCommand command = new SqlCommand(query, connection);
-                    SqlDataReader reader = command.ExecuteReader();
-
                     while (reader.Read())
                     {
-                        Barber barber = new Barber
+                        var barbero = new Barber
                         {
-                            IdBarbero = reader.GetInt32(0),
-                            NombreBarbero = reader.GetString(1)
+                            IdBarbero = reader.GetInt32(reader.GetOrdinal("IdBarbero")),
+                            NombreBarbero = reader.GetString(reader.GetOrdinal("NombreBarbero")),
+                            IdSucursal = reader.GetInt32(reader.GetOrdinal("IdSucursal"))
                         };
-
-                        barbers.Add(barber);
+                        barberos.Add(barbero);
                     }
                 }
-                catch (Exception ex)
-                {
-                    // Manejo de errores
-                    Console.WriteLine("Error al obtener barberos: " + ex.Message);
-                }
+                _connection.Close();
             }
-
-            return barbers;
+            return barberos;
         }
 
-        public void AgregarBarbero(Barber barber)
+        // Método para agregar un nuevo barbero
+        public void AgregarBarbero(Barber barbero)
         {
-            using (SqlConnection connection = _databaseConnection.GetConnection())
-            {
-                try
-                {
-                    if (connection.State == ConnectionState.Closed)
-                    {
-                        connection.Open();
-                    }
+            string query = "INSERT INTO TBBarbero (NombreBarbero, IdSucursal) " +
+                           "VALUES (@NombreBarbero, @IdSucursal)";
 
-                    // Consulta para agregar un nuevo barbero
-                    string query = "INSERT INTO TBBarbero (NombreBarbero) VALUES (@NombreBarbero)";
-                    SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@NombreBarbero", barber.NombreBarbero);
-                    command.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    // Manejo de la excepción
-                    Console.WriteLine("Error al agregar barbero: " + ex.Message);
-                }
-                finally
-                {
-                    if (connection.State == ConnectionState.Open)
-                    {
-                        connection.Close();
-                    }
-                }
+            using (var command = new SqlCommand(query, _connection))
+            {
+                command.Parameters.AddWithValue("@NombreBarbero", barbero.NombreBarbero);
+                command.Parameters.AddWithValue("@IdSucursal", barbero.IdSucursal);
+
+                _connection.Open();
+                command.ExecuteNonQuery();
+                _connection.Close();
             }
         }
     }

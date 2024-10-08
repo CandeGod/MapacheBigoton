@@ -18,7 +18,7 @@ CREATE TABLE TBBarbero(
     IdSucursal INT NOT NULL,
     CONSTRAINT pkBarbero PRIMARY KEY (IdBarbero),
     CONSTRAINT fkSucursalBarbero FOREIGN KEY (IdSucursal) 
-        REFERENCES TBSucursal(IdSucursal) ON DELETE CASCADE
+        REFERENCES TBSucursal(IdSucursal) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Tabla de Servicios
@@ -30,7 +30,7 @@ CREATE TABLE TBServicio(
     IdSucursal INT NOT NULL,
     CONSTRAINT pkServicio PRIMARY KEY (IdServicio),
     CONSTRAINT fkSucursalServicio FOREIGN KEY (IdSucursal) 
-        REFERENCES TBSucursal(IdSucursal) ON DELETE CASCADE
+        REFERENCES TBSucursal(IdSucursal) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Tabla de Clientes
@@ -42,9 +42,11 @@ CREATE TABLE TBCliente(
 );
 
 -- Tabla de Citas
+-- Tabla de Citas
 CREATE TABLE TBCita(
     IdCita INT NOT NULL IDENTITY,
     Fecha DATE NOT NULL,
+    Hora TIME NOT NULL, -- Se agrega la columna Hora
     IdCliente INT NOT NULL,
     IdBarbero INT NOT NULL,
     IdServicio INT NOT NULL,
@@ -54,8 +56,11 @@ CREATE TABLE TBCita(
     CONSTRAINT fkBarbero FOREIGN KEY (IdBarbero) REFERENCES TBBarbero(IdBarbero),
     CONSTRAINT fkServicio FOREIGN KEY (IdServicio) REFERENCES TBServicio(IdServicio),
     CONSTRAINT fkSucursalCita FOREIGN KEY (IdSucursal) 
-        REFERENCES TBSucursal(IdSucursal) ON DELETE CASCADE
+        REFERENCES TBSucursal(IdSucursal) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
+
 
 /*INSERT INTO TBSucursal (Ubicacion, Direccion) VALUES 
     ('Sucursal PARA ELMINAR', 'Calle Madero 123')*/
@@ -104,15 +109,16 @@ INSERT INTO TBCliente (NombreCliente, TelefonoCliente) VALUES
     ('Miguel Herrera', '5550123456');
 
 -- Insertar citas
-INSERT INTO TBCita (Fecha, IdCliente, IdBarbero, IdServicio, IdSucursal) VALUES 
-    ('2024-09-26', 1, 1, 1, 1),
-    ('2024-09-26', 2, 2, 2, 1),
-    ('2024-09-26', 3, 3, 3, 2),
-    ('2024-09-26', 4, 4, 4, 2),
-    ('2024-09-27', 5, 5, 5, 3),
-    ('2024-09-27', 6, 6, 6, 3),
-    ('2024-09-27', 7, 7, 7, 4),
-    ('2024-09-27', 8, 8, 8, 4);
+INSERT INTO TBCita (Fecha, Hora, IdCliente, IdBarbero, IdServicio, IdSucursal) VALUES 
+    ('2024-09-26', '10:00:00', 1, 1, 1, 1),
+    ('2024-09-26', '11:00:00', 2, 2, 2, 1),
+    ('2024-09-26', '12:00:00', 3, 3, 3, 2),
+    ('2024-09-26', '13:00:00', 4, 4, 4, 2),
+    ('2024-09-27', '14:00:00', 5, 5, 5, 3),
+    ('2024-09-27', '15:00:00', 6, 6, 6, 3),
+    ('2024-09-27', '16:00:00', 7, 7, 7, 4),
+    ('2024-09-27', '17:00:00', 8, 8, 8, 4);
+
 
 						 
 select * from TBSucursal;
@@ -120,3 +126,16 @@ select * from TBBarbero;
 select * from TBCliente;
 select * from TBCita;
 select * from TBServicio;
+
+CREATE PROCEDURE InsertarCita
+    @Fecha DATE,
+    @Hora TIME,
+    @IdCliente INT,
+    @IdBarbero INT,
+    @IdServicio INT,
+    @IdSucursal INT
+AS
+BEGIN
+    INSERT INTO TBCita (Fecha, Hora, IdCliente, IdBarbero, IdServicio, IdSucursal)
+    VALUES (@Fecha, @Hora, @IdCliente, @IdBarbero, @IdServicio, @IdSucursal);
+END

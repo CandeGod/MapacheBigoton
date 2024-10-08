@@ -10,6 +10,6 @@ namespace MapacheBigoton.Class
     {
         public int IdBarbero {  get; set; }
         public string NombreBarbero { get; set; }
-
+        public object IdSucursal { get; internal set; }
     }
 }

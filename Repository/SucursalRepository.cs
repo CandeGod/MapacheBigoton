@@ -105,15 +105,18 @@ namespace MapacheBigoton.Repository
                 string query = "UPDATE TBSucursal SET Ubicacion = @Ubicacion, Direccion = @Direccion " +
                                "WHERE IdSucursal = @IdSucursal";
 
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Ubicacion", sucursal.UbicacionSucursal);
-                command.Parameters.AddWithValue("@Direccion", sucursal.DireccionSucursal);
-                command.Parameters.AddWithValue("@IdSucursal", sucursal.IdSucursal);
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Ubicacion", sucursal.UbicacionSucursal);
+                    command.Parameters.AddWithValue("@Direccion", sucursal.DireccionSucursal);
+                    command.Parameters.AddWithValue("@IdSucursal", sucursal.IdSucursal);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
             }
         }
+
 
         // Eliminar una sucursal
         public void EliminarSucursal(int idSucursal)
