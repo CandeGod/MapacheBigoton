@@ -1,12 +1,5 @@
 ﻿using MapacheBigoton.Class;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MapacheBigoton.Controls
@@ -18,12 +11,13 @@ namespace MapacheBigoton.Controls
             InitializeComponent();
         }
 
+        // Método para cargar los datos de la cita
         public void CargarDatos(Cita cita)
         {
             lblFecha.Text = cita.Fecha.ToString("dd/MM/yyyy");
-            lblCliente.Text = cita.Client.NombreCliente;
-            lblBarbero.Text = cita.Barber.NombreBarbero;
-            lblServicio.Text = cita.Service.NombreServicio;
+            lblCliente.Text = "Cliente: " + cita.Client.NombreCliente;
+            lblBarbero.Text = "Barbero: " + cita.Barber.NombreBarbero;
+            lblServicio.Text = "Servicio: " + cita.Service.NombreServicio;
         }
     }
 }

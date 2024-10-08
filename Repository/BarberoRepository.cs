@@ -4,9 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MapacheBigoton.Repository
 {
@@ -25,29 +22,36 @@ namespace MapacheBigoton.Repository
 
             using (SqlConnection connection = _databaseConnection.GetConnection())
             {
-                if (connection.State == ConnectionState.Closed)
+                try
                 {
-                    connection.Open();
-                }
-                string query = "SELECT B.NombreBarbero, C.IdBarbero " +
-                               "FROM TBBarbero C " +
-                               "JOIN TBBarbero CL ON C.IdBarbero = CL.IdBarbero " +
-                               "JOIN TBBarbero B ON C.IdBarbero = B.IdBarbero";
-
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    Barber barber = new Barber
+                    if (connection.State == ConnectionState.Closed)
                     {
-                        NombreBarbero = reader.GetString(0),
-                        IdBarbero = reader.GetInt32(1)
-                    };
+                        connection.Open();
+                    }
 
-                    barbers.Add(barber);
+                    // Query simplificado para obtener solo los barberos
+                    string query = "SELECT IdBarbero, NombreBarbero FROM TBBarbero";
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Barber barber = new Barber
+                        {
+                            IdBarbero = reader.GetInt32(0),
+                            NombreBarbero = reader.GetString(1)
+                        };
+
+                        barbers.Add(barber);
+                    }
                 }
-            } // La conexión se cierra automáticamente aquí
+                catch (Exception ex)
+                {
+                    // Manejo de errores
+                    Console.WriteLine("Error al obtener barberos: " + ex.Message);
+                }
+            }
 
             return barbers;
         }
@@ -62,6 +66,8 @@ namespace MapacheBigoton.Repository
                     {
                         connection.Open();
                     }
+
+                    // Consulta para agregar un nuevo barbero
                     string query = "INSERT INTO TBBarbero (NombreBarbero) VALUES (@NombreBarbero)";
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@NombreBarbero", barber.NombreBarbero);
@@ -70,7 +76,7 @@ namespace MapacheBigoton.Repository
                 catch (Exception ex)
                 {
                     // Manejo de la excepción
-                    Console.WriteLine(ex.Message);
+                    Console.WriteLine("Error al agregar barbero: " + ex.Message);
                 }
                 finally
                 {
@@ -79,7 +85,7 @@ namespace MapacheBigoton.Repository
                         connection.Close();
                     }
                 }
-            } // La conexión se cierra automáticamente aquí
-        }
+            }
+        }
     }
 }

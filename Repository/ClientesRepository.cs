@@ -4,9 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MapacheBigoton.Repository
 {
@@ -19,38 +16,54 @@ namespace MapacheBigoton.Repository
             _databaseConnection = databaseConnection;
         }
 
+        // Método para obtener todos los clientes
         public List<Client> ObtenerClientes()
         {
             List<Client> clientes = new List<Client>();
 
             using (SqlConnection connection = _databaseConnection.GetConnection())
             {
-                if (connection.State == ConnectionState.Closed)
+                try
                 {
-                    connection.Open();
-                }
-                string query = "SELECT IdCliente, NombreCliente, TelefonoCliente FROM TBCliente";
-
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    Client cliente = new Client
+                    if (connection.State == ConnectionState.Closed)
                     {
-                        IdCliente = reader.GetInt32(0),
-                        NombreCliente = reader.GetString(1),
-                        TelefonoCliente = reader.GetString(2)
-                    };
+                        connection.Open();
+                    }
 
-                    clientes.Add(cliente);
+                    string query = "SELECT IdCliente, NombreCliente, TelefonoCliente FROM TBCliente";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Client cliente = new Client
+                        {
+                            IdCliente = reader.GetInt32(0),
+                            NombreCliente = reader.GetString(1),
+                            TelefonoCliente = reader.GetString(2)
+                        };
+
+                        clientes.Add(cliente);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Manejo de excepciones
+                    Console.WriteLine("Error al obtener clientes: " + ex.Message);
+                }
+                finally
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
                 }
             }
 
             return clientes;
         }
 
-
+        // Método para agregar un nuevo cliente
         public void AgregarCliente(Client cliente)
         {
             using (SqlConnection connection = _databaseConnection.GetConnection())
@@ -61,15 +74,18 @@ namespace MapacheBigoton.Repository
                     {
                         connection.Open();
                     }
+
                     string query = "INSERT INTO TBCliente (NombreCliente, TelefonoCliente) VALUES (@NombreCliente, @TelefonoCliente)";
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@NombreCliente", cliente.NombreCliente);
                     command.Parameters.AddWithValue("@TelefonoCliente", cliente.TelefonoCliente);
+
                     command.ExecuteNonQuery();
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    // Manejo de excepciones
+                    Console.WriteLine("Error al agregar cliente: " + ex.Message);
                 }
                 finally
                 {
@@ -78,9 +94,7 @@ namespace MapacheBigoton.Repository
                         connection.Close();
                     }
                 }
-            } 
+            }
         }
-
-
     }
 }
