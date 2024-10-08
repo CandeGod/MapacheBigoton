@@ -27,18 +27,18 @@ namespace MapacheBigoton
         }
         private void CargarBarberos()
         {
-            List<Barber> barberos = _barberoRepository.ObtenerBarberos();
+            //List<Barber> barberos = _barberoRepository.ObtenerBarberos();
 
-            // Limpia el panel antes de agregar los controles
-            flowLayoutPanel1.Controls.Clear();
+            //// Limpia el panel antes de agregar los controles
+            //flowLayoutPanel1.Controls.Clear();
 
-            foreach (var barbero in barberos)
-            {
-                UserControlBarber userControl = new UserControlBarber();
-                userControl.CargarDatos(barbero);
-                userControl.Dock = DockStyle.Top; // Asegúrate de que los controles se apilen verticalmente
-                flowLayoutPanel1.Controls.Add(userControl);
-            }
+            //foreach (var barbero in barberos)
+            //{
+            //    UserControlBarber userControl = new UserControlBarber();
+            //    userControl.CargarDatos(barbero);
+            //    userControl.Dock = DockStyle.Top; // Asegúrate de que los controles se apilen verticalmente
+            //    flowLayoutPanel1.Controls.Add(userControl);
+            //}
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
